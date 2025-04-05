@@ -7,6 +7,24 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
+let LANGUAGE = 'en';
+
+const changeLanguage = () => {
+  const languageButton = document.querySelector('#language-button');
+  languageButton.innerText = 'EN';
+  languageButton.addEventListener('click', () => {
+    console.log(languageButton, ' ADSADDSA');
+
+    if (languageButton.innerText === 'EN') {
+      languageButton.innerText = 'FI';
+      LANGUAGE = 'fi';
+    } else if (languageButton.innerText === 'FI') {
+      languageButton.innerText = 'EN';
+      LANGUAGE = 'en';
+    }
+  });
+};
+
 const table = document.getElementById('restaurant-box');
 const tableBodyTr = document.createElement('tr');
 const tableBody = document.querySelector('#menu tbody');
@@ -19,27 +37,18 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-const fillWeekTable = () => {
+const fillWeekTable = (weekDays) => {
   const dateObject = new Date();
-  const weekDays = [
-    {id: 0, name: 'Monday', selected: false},
-    {id: 1, name: 'Tuesday', selected: false},
-    {id: 2, name: 'Wednesday', selected: false},
-    {id: 3, name: 'Thursday', selected: false},
-    {id: 4, name: 'Friday', selected: false},
-    {id: 5, name: 'Saturday', selected: false},
-    {id: 6, name: 'Sunday', selected: false},
-  ];
-  const currentDay = weekDays[dateObject.getDate()];
-  currentDay.selected = true;
-  currentDay.name = 'Today';
+  console.log(weekDays);
 
   const weekClass = document.querySelector('.week-day-names');
+  weekClass.innerHTML = '';
+  weekDays.forEach((day) => {
+    weekClass.innerHTML += `<th><a id="${day.date}" href="#">${day.date}</a></th>`;
+  });
 
   // tungetaan weekClass elementit
-  weekDays.forEach((day) => {
-    weekClass.innerHTML += `<th><a id="${day.name}" href="#">${day.name}</a></th>`;
-  });
+
   // lisätään jokaiseen a elementtiin clickki
   document.querySelectorAll('.week-day-names a').forEach((elem) => {
     //alustetaan nykyinen päivä
@@ -133,10 +142,11 @@ const fillTable = (filteredRestaurants, dayIndex) => {
         .forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
 
-      const menu = await getRestaurantDailyMenu(restaurant._id, 'fi');
-      const weektest = await getRestaurantWeeklyMenu(restaurant._id, 'en');
+      const menu = await getRestaurantDailyMenu(restaurant._id, LANGUAGE);
+      const weektest = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
 
-      console.log(weektest.days[dayIndex]);
+      fillWeekTable(weektest.days);
+
       tableBody.innerHTML = restaurantModal(restaurant, createMenuHtml(menu.courses));
     });
     table.appendChild(row);
@@ -160,8 +170,8 @@ const companySelect = () => {
 
 const main = async () => {
   try {
+    changeLanguage();
     loginElement();
-    fillWeekTable();
     await getRestaurants();
     sortRestaurants();
     fillTable(restaurants);
