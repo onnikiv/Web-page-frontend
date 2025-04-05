@@ -41,15 +41,26 @@ const fillWeekTable = () => {
   });
   // lisätään jokaiseen a elementtiin clickki
   document.querySelectorAll('.week-day-names a').forEach((elem) => {
+    //alustetaan nykyinen päivä
     if (elem.id === 'Today') {
       elem.classList.add('highlight');
     }
     elem.addEventListener('click', () => {
       const selectedDay = weekDays.find((day) => day.name === elem.id);
-      selectedDay.selected = !selectedDay.selected;
 
-      selectedDay.selected ? elem.classList.add('highlight') : elem.classList.remove('highlight');
+      weekDays.forEach((day) => {
+        const dayElement = document.getElementById(day.name);
+        if (day.name === selectedDay.name) {
+          day.selected = true;
+          dayElement.classList.add('highlight');
+        } else {
+          day.selected = false;
+          dayElement.classList.remove('highlight');
+        }
+      });
+
       console.log(selectedDay);
+      weekDays.forEach((day) => console.log(day.name, day.selected));
     });
   });
 };
@@ -112,7 +123,9 @@ const fillTable = (filteredRestaurants) => {
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     row.addEventListener('click', async () => {
-      document.querySelectorAll('.highlight').forEach((elem) => elem.classList.remove('highlight'));
+      document
+        .querySelectorAll('#restaurant-box tr.highlight')
+        .forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
 
       const menu = await getRestaurantDailyMenu(restaurant._id, 'fi');
