@@ -7,8 +7,6 @@ import {
 } from './restaurants.js';
 
 const table = document.getElementById('restaurant-box');
-const modal = document.querySelector('dialog');
-
 const tableBodyTr = document.createElement('tr');
 const tableBody = document.querySelector('#menu tbody');
 
@@ -25,9 +23,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const fillWeekTable = () => {
   const userDate = new Date();
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const dayNum = userDate.getDate();
   const dayString = weekdays[userDate.getDay()];
-  const month = userDate.getMonth() + 1;
 
   const weekdayTableRows = document.querySelectorAll('.weekday');
 

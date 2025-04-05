@@ -1,6 +1,6 @@
 html {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  overflow-y: scroll; /* Always show the vertical scrollbar */
+  overflow-y: scroll;
 }
 
 body {
@@ -52,7 +52,7 @@ header .header-buttons button {
   background-color: rgb(137, 43, 226);
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  margin: 0 5px; /* Add spacing between buttons */
+  margin: 0 5px;
 }
 header .header-buttons button:hover {
   color: black;
@@ -79,15 +79,26 @@ header .header-buttons button:hover {
 }
 #restaurant-box thead {
   position: sticky;
-  top: 0; /* Sticks to the top of the container */
-  z-index: 10; /* Ensures it stays above other content */
-  background-color: rgb(114, 114, 114); /* Set a background color to avoid transparency */
+  top: 0;
+  z-index: 10;
+  background-color: rgb(114, 114, 114);
+  border-bottom: 1px solid #000000;
+}
+
+#restaurant-box th {
+  border-bottom: 1px solid #000000;
+  padding: 0.5em 1em;
+}
+
+#restaurant-box tr {
+  height: 2%;
 }
 
 #restaurant-box td {
   border-bottom: 1px solid #000000;
   padding: 0.5em 1em;
 }
+
 #restaurant-box tr:nth-child(odd) {
   background-color: rgb(255, 255, 255);
 }
@@ -95,13 +106,12 @@ header .header-buttons button:hover {
 #restaurant-box tr:nth-child(even) {
   background-color: rgb(218, 218, 218);
 }
+
 #restaurant-box tr.highlight {
   background-color: #383838;
-  font-weight: bold;
+  font-weight: normal;
   color: rgb(255, 255, 255);
 }
-
-
 
 #map {
   height: 100%;
@@ -138,8 +148,8 @@ header .header-buttons button:hover {
   align-items: center;
   width: 100%;
   padding-top: 2%;
-  border-collapse: collapse; /* Ensures clean table layout */
-  table-layout: fixed; /* Ensures consistent column widths */
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 #menu thead {
@@ -184,10 +194,10 @@ header .header-buttons button:hover {
 }
 
 .course {
-  text-align: center; /* Center-align text in cells */
+  text-align: center;
   padding-top: 2%;
-  padding: 0.5em; /* Add padding for better spacing */
-  border: 1px solid #ccc; /* Optional: Add borders for clarity */
+  padding: 0.5em;
+  border: 1px solid #ccc;
 }
 
 
