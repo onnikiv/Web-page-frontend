@@ -162,7 +162,14 @@ header .header-buttons button:hover {
 
 #menu tbody tr {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.course {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 10px;
 }
 
 tr:nth-child(odd) {

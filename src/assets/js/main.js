@@ -93,13 +93,11 @@ const createMenuHtml = (courses) => {
     courses
       .map(
         ({name, price, diets}) => `
-      <td>
         <article class="course">
-          <p><strong>${name}</strong>,
-          Hinta: ${price || ''},
-          Allergeenit: ${diets}</p>
+          <p><strong>${name}</strong>
+          <p>Hinta: ${price || ''}</p>
+          <p>Allergeenit: ${diets}</p>
         </article>
-      </td>
     `
       )
       .join('') || '<td><p><strong>Menu unavailable.</strong></p></td>'
