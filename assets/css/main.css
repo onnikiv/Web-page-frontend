@@ -1,0 +1,147 @@
+html {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: blueviolet;
+  border-bottom: 2px solid black;
+  font-size: 200%;
+  transition-duration: 0.5s;
+
+}
+
+#page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+#page-title:hover {
+  color:rgb(0, 0, 0);
+  -webkit-text-stroke: 1px black;
+}
+header p {
+  color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header .header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 20%;
+}
+
+header .header-buttons button {
+  height: 40px;
+  color: #f0f0f0;
+  background-color: rgb(137, 43, 226);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 5px; /* Add spacing between buttons */
+}
+header .header-buttons button:hover {
+  color: black;
+  background-color: rgb(141, 62, 216);
+  transition: color 0.3s, color 0.3s;
+}
+
+
+#menu {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0 auto;
+  margin-top: 1%;
+  padding: 0;
+  table-layout: fixed;
+  text-align: center;
+}
+
+#menu a {
+  color: aliceblue;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  padding: 0.5em 1em;
+  text-align: left;
+  font-weight: bolder;
+  background-color: blueviolet;
+  border-radius: 20%;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#menu a:hover {
+  background-color: rgb(194, 129, 255);
+  color: rgb(116, 116, 116);
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+.center-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 2px solid black;
+  font-size: 200%;
+}
+
+.restaurant-box {
+  height: 500px;
+  width: 33%;
+  padding: 0;
+  position: fixed;
+  display: block;
+  position: relative;
+
+}
+
+#login-modal {
+  height: 300px;
+  width: 300px;
+  padding: 0;
+  background-color: white;
+  position: fixed;
+  top: 12%;
+  left: 73%;
+  z-index: 1000;
+
+}
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  display: block;
+  position: relative;
+}
+
+#menu a.highlight {
+  color: red;
+  background-color: #383838;
+  font-weight: bold;
+  font-size: large;
+}
