@@ -103,7 +103,16 @@ const createMenuHtml = (courses) => {
   );
 };
 
+const tableHeads = () => {
+  return `<tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Company</th>
+      </tr>`;
+};
+
 const fillTable = (filteredRestaurants) => {
+  table.innerHTML = tableHeads();
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     row.addEventListener('click', async () => {
@@ -120,6 +129,22 @@ const fillTable = (filteredRestaurants) => {
       );
     });
     table.appendChild(row);
+  });
+};
+
+const filterRestaurants = (type) => {
+  return type === 'All'
+    ? restaurants
+    : restaurants.filter((restaurant) => restaurant.company === type);
+};
+
+const companySelect = () => {
+  const companySelect = document.querySelector('#company-select');
+  companySelect.addEventListener('change', (event) => {
+    const option = event.target.value;
+    console.log(filterRestaurants(option));
+    const filteredRestaurants = filterRestaurants(option);
+    fillTable(filteredRestaurants);
   });
 };
 
