@@ -72,6 +72,15 @@ header .header-buttons button:hover {
   border: 1px solid #ccc;
   border-right: 2px solid black;
 }
+#restaurant-info {
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10px auto;
+  flex-direction: column;
+}
+
 
 #restaurant-box {
   width: 100%;
@@ -166,14 +175,14 @@ header .header-buttons button:hover {
   padding: 0.5em 1em;
   font-weight: bolder;
   background-color: blueviolet;
-  border-radius: 20%;
+  border-radius: 0%;
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
 }
 
 #menu a:hover {
   background-color: rgb(194, 129, 255);
-  color: rgb(116, 116, 116);
+  color: rgb(0, 102, 204);
 }
 
 #menu a.highlight {

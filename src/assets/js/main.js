@@ -1,9 +1,8 @@
-import {restaurantRow, restaurantModal} from './components.js';
+import {restaurantRow, restaurantMenuItems, getRestaurantInfo} from './components.js';
 import {
   restaurants,
   getRestaurants,
   sortRestaurants,
-  getRestaurantDailyMenu,
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
@@ -11,25 +10,25 @@ let LANGUAGE = 'en';
 
 const changeLanguage = () => {
   const languageButton = document.querySelector('#language-button');
-  languageButton.innerText = 'EN';
+  languageButton.textContent = LANGUAGE.toUpperCase();
   languageButton.addEventListener('click', () => {
-    console.log(languageButton, ' ADSADDSA');
-
-    if (languageButton.innerText === 'EN') {
-      languageButton.innerText = 'FI';
+    if (LANGUAGE === 'en') {
       LANGUAGE = 'fi';
-    } else if (languageButton.innerText === 'FI') {
-      languageButton.innerText = 'EN';
+      languageButton.innerText = 'FI';
+    } else if (LANGUAGE === 'fi') {
       LANGUAGE = 'en';
+      languageButton.innerText = 'EN';
     }
+    console.log('Language changed to:', LANGUAGE);
   });
 };
 
 const table = document.getElementById('restaurant-box');
-const tableBodyTr = document.createElement('tr');
 const tableBody = document.querySelector('#menu tbody');
 const errorBox = document.getElementById('error');
-let dayIndex = 0;
+
+let MEMORYNUMBER = null;
+
 /* eslint-disable no-undef */
 const map = L.map('map').setView([60.2144768, 25.0281984], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -38,45 +37,45 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const fillWeekTable = (weekDays) => {
-  const dateObject = new Date();
-  console.log(weekDays);
-
   const weekClass = document.querySelector('.week-day-names');
   weekClass.innerHTML = '';
+
+  if (weekDays.length === 0) {
+    weekClass.innerHTML = `<article class="course">
+      <p><strong>Menu unavailable.</strong></p>
+    </article>`;
+    return;
+  }
+
+  let dayIndex = 0;
   weekDays.forEach((day) => {
-    weekClass.innerHTML += `<th><a id="${day.date}" href="#">${day.date}</a></th>`;
+    weekClass.innerHTML += `<th><a id="${dayIndex}" href="#">${day.date}</a></th>`;
+    dayIndex++;
   });
 
-  // tungetaan weekClass elementit
-
-  // lisätään jokaiseen a elementtiin clickki
   document.querySelectorAll('.week-day-names a').forEach((elem) => {
-    //alustetaan nykyinen päivä
-    if (elem.id === 'Today') {
-      elem.classList.add('highlight');
-    }
-    elem.addEventListener('click', () => {
-      const selectedDay = weekDays.find((day) => day.name === elem.id);
+    elem.addEventListener('click', (event) => {
+      event.preventDefault();
 
-      weekDays.forEach((day) => {
-        const dayElement = document.getElementById(day.name);
-        if (day.name === selectedDay.name) {
-          day.selected = true;
-          console.log(day, ' TÄÄ');
-          dayElement.classList.add('highlight');
-        } else {
-          day.selected = false;
-          dayElement.classList.remove('highlight');
-        }
+      document.querySelectorAll('.week-day-names a.highlight').forEach((link) => {
+        link.classList.remove('highlight');
       });
 
-      console.log(selectedDay.id);
-      dayIndex = selectedDay.id;
-      console.log('Päivä nyt: ', dayIndex);
+      MEMORYNUMBER = elem.id;
+      elem.classList.add('highlight');
 
-      weekDays.forEach((day) => console.log(day.name, day.selected));
+      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(weekDays[elem.id]));
     });
   });
+
+  if (MEMORYNUMBER !== null) {
+    const previousDay = document.getElementById(MEMORYNUMBER);
+    console.log(previousDay, 'perivus');
+    if (previousDay) {
+      previousDay.classList.add('highlight');
+      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(weekDays[MEMORYNUMBER]));
+    }
+  }
 };
 
 const loginElement = () => {
@@ -100,32 +99,35 @@ const loginElement = () => {
   });
 };
 
-const openMenuForDay = (selectedDay) => {
-  tableBodyTr.innerText = ``;
-  tableBodyTr.innerText = `TEST ${selectedDay}`;
-  tableBody.append();
-};
+const createMenuHtml = (index) => {
+  const selectedDay = index.courses;
+  console.log(selectedDay, 'ASASDADSADSAS');
 
-const createMenuHtml = (courses) => {
   return (
-    courses
+    selectedDay
       .map(
         ({name, price, diets}) => `
-        <article class="course">
-          <p><strong>${name}</strong></p>
-          <p>Hinta: ${price || ''}</p>
-          <p>Allergeenit: ${diets}</p>
-        </article>
-    `
+      <article class="course">
+        <p><strong>${name}</strong></p>
+        <p>Hinta: ${price || ''}</p>
+        <p>Allergeenit: ${diets}</p>
+      </article>`
       )
       .join('') ||
     `<article class="course">
-    <p><strong>Menu unavailable.</strong></p></article>`
+      <p><strong>Menu unavailable.</strong></p>
+    </article>`
   );
 };
 
 const tableHeads = () => {
-  return `<tr>
+  return LANGUAGE === 'fi'
+    ? `<tr>
+        <th>Nimi</th>
+        <th>Osoite</th>
+        <th>Yritys</th>
+      </tr>`
+    : `<tr>
         <th>Name</th>
         <th>Address</th>
         <th>Company</th>
@@ -142,12 +144,13 @@ const fillTable = (filteredRestaurants, dayIndex) => {
         .forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
 
-      const menu = await getRestaurantDailyMenu(restaurant._id, LANGUAGE);
-      const weektest = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
+      tableBody.innerHTML = '';
 
-      fillWeekTable(weektest.days);
-
-      tableBody.innerHTML = restaurantModal(restaurant, createMenuHtml(menu.courses));
+      const weekMenu = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
+      console.log(weekMenu.days, 'VIIKON MENU KYSEISELTÄ RAVINTOLALTA');
+      fillWeekTable(weekMenu.days);
+      const restaurantInfo = document.getElementById('restaurant-info');
+      restaurantInfo.innerHTML = getRestaurantInfo(restaurant);
     });
     table.appendChild(row);
   });

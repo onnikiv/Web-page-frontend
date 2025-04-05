@@ -1,6 +1,7 @@
 import {url} from './variables.js';
 import {fetchData, sortByName} from './utils.js';
-export let restaurants = [];
+
+let restaurants = [];
 
 const getRestaurants = async () => {
   try {
@@ -37,4 +38,10 @@ const sortRestaurants = () => {
   restaurants.sort(sortByName);
 };
 
-export {getRestaurants, getRestaurantDailyMenu, getRestaurantWeeklyMenu, sortRestaurants};
+export {
+  restaurants,
+  getRestaurants,
+  getRestaurantDailyMenu,
+  getRestaurantWeeklyMenu,
+  sortRestaurants,
+};

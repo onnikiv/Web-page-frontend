@@ -9,11 +9,23 @@ const restaurantRow = (restaurant) => {
   return tr;
 };
 
-const restaurantModal = (restaurant, menu) => {
-  const {name, address, postalCode, city, phone, company} = restaurant;
-
-  const html = name + menu;
+const restaurantMenuItems = (menu) => {
+  const html = menu;
   return html;
 };
 
-export {restaurantRow, restaurantModal};
+const getRestaurantInfo = (restaurant) => {
+  const {name, address, postalCode, city, phone, company} = restaurant;
+
+  const info = `<article class="restaurantInfo">
+      <h3>${name}</h3>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Postal Code:</strong> ${postalCode}</p>
+      <p><strong>City:</strong> ${city}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Company:</strong> ${company}</p>
+    </article>`;
+  return info;
+};
+
+export {restaurantRow, restaurantMenuItems, getRestaurantInfo};
