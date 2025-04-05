@@ -1,5 +1,6 @@
 import {url} from './variables.js';
 import {fetchData, sortByName} from './utils.js';
+import {errorBox} from './main.js';
 
 let restaurants = [];
 

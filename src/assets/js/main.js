@@ -26,7 +26,7 @@ const changeLanguage = () => {
 
 const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('#menu tbody');
-//const errorBox = document.getElementById('error');
+export const errorBox = document.getElementById('error');
 
 let MEMORYNUMBER = null;
 
