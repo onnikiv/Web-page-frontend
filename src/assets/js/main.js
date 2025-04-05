@@ -6,6 +6,7 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
+import {addRestaurantsToMap, changeMapView} from './map.js';
 let LANGUAGE = 'en';
 
 const changeLanguage = () => {
@@ -25,16 +26,9 @@ const changeLanguage = () => {
 
 const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('#menu tbody');
-const errorBox = document.getElementById('error');
+//const errorBox = document.getElementById('error');
 
 let MEMORYNUMBER = null;
-
-/* eslint-disable no-undef */
-const map = L.map('map').setView([60.2144768, 25.0281984], 11);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
 
 const fillWeekTable = (weekDays) => {
   const weekClass = document.querySelector('.week-day-names');
@@ -149,7 +143,7 @@ const fillTable = (filteredRestaurants) => {
         .forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
 
-      changeMapView(restaurant.location.coordinates);
+      changeMapView(restaurant);
 
       tableBody.innerHTML = '';
 
@@ -176,33 +170,6 @@ const companySelect = () => {
     const filteredRestaurants = filterRestaurants(option);
     fillTable(filteredRestaurants);
   });
-};
-
-const addRestaurantsToMap = (restaurant) => {
-  const {name, address, postalCode, city, phone, company} = restaurant;
-  const coords = restaurant.location.coordinates;
-  const latitude = coords[1];
-  const longitude = coords[0];
-
-  console.log(coords[1], coords[0]);
-  L.marker([latitude, longitude])
-    .addTo(map)
-    .bindPopup(
-      `<h3>${name}</h3>
-      <p><strong>Address:</strong> ${address}</p>
-      <p><strong>Postal Code:</strong> ${postalCode}</p>
-      <p><strong>City:</strong> ${city}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Company:</strong> ${company}</p>`
-    );
-  //.openPopup();
-};
-
-const changeMapView = (coords) => {
-  const latitude = coords[1];
-  const longitude = coords[0];
-  map.setView([latitude, longitude], 11);
-  map.openPopup();
 };
 
 const main = async () => {
