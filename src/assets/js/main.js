@@ -32,6 +32,7 @@ const fillWeekTable = () => {
       if (link.id && link.textContent === dayString) {
         link.classList.add('current-day');
         link.innerText = `Today`;
+        link.classList.add('highlight');
       }
     });
   });
