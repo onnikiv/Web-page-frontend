@@ -30,7 +30,7 @@ const errorBox = document.getElementById('error');
 let MEMORYNUMBER = null;
 
 /* eslint-disable no-undef */
-const map = L.map('map').setView([60.2144768, 25.0281984], 13);
+const map = L.map('map').setView([60.2144768, 25.0281984], 11);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -122,27 +122,34 @@ const createMenuHtml = (index) => {
 
 const tableHeads = () => {
   return LANGUAGE === 'fi'
-    ? `<tr>
-        <th>Nimi</th>
-        <th>Osoite</th>
-        <th>Yritys</th>
-      </tr>`
-    : `<tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Company</th>
-      </tr>`;
+    ? `<thead>
+        <tr>
+          <th>Nimi</th>
+          <th>Osoite</th>
+          <th>Yritys</th>
+        </tr>
+      </thead>`
+    : `<thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Company</th>
+        </tr>
+      </thead>`;
 };
 
-const fillTable = (filteredRestaurants, dayIndex) => {
+const fillTable = (filteredRestaurants) => {
   table.innerHTML = tableHeads();
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
+    addRestaurantsToMap(restaurant);
     row.addEventListener('click', async () => {
       document
         .querySelectorAll('#restaurant-box tr.highlight')
         .forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
+
+      changeMapView(restaurant.location.coordinates);
 
       tableBody.innerHTML = '';
 
@@ -169,6 +176,33 @@ const companySelect = () => {
     const filteredRestaurants = filterRestaurants(option);
     fillTable(filteredRestaurants);
   });
+};
+
+const addRestaurantsToMap = (restaurant) => {
+  const {name, address, postalCode, city, phone, company} = restaurant;
+  const coords = restaurant.location.coordinates;
+  const latitude = coords[1];
+  const longitude = coords[0];
+
+  console.log(coords[1], coords[0]);
+  L.marker([latitude, longitude])
+    .addTo(map)
+    .bindPopup(
+      `<h3>${name}</h3>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Postal Code:</strong> ${postalCode}</p>
+      <p><strong>City:</strong> ${city}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Company:</strong> ${company}</p>`
+    );
+  //.openPopup();
+};
+
+const changeMapView = (coords) => {
+  const latitude = coords[1];
+  const longitude = coords[0];
+  map.setView([latitude, longitude], 11);
+  map.openPopup();
 };
 
 const main = async () => {

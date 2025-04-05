@@ -203,7 +203,9 @@ header .header-buttons button:hover {
 }
 
 .course {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: left;
   padding-top: 2%;
   padding: 0.5em;
   border: 1px solid #ccc;
