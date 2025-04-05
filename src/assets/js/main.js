@@ -25,7 +25,7 @@ const changeLanguage = () => {
 };
 
 const table = document.getElementById('restaurant-box');
-const tableBody = document.querySelector('#menu tbody');
+const tableBody = document.querySelector('.selected-day-menu');
 export const errorBox = document.getElementById('error');
 
 let MEMORYNUMBER = null;
@@ -104,12 +104,12 @@ const createMenuHtml = (index) => {
       <article class="course">
         <p><strong>${name}</strong></p>
         <p>${price || ''}</p>
-        <p>${diets}</p>
+        <p>${diets || ''}</p>
       </article>`
       )
       .join('') ||
     `<article class="course">
-      <p><strong>Menu unavailable.</strong></p>
+      <p><strong>Menu unavailable for selected day</strong></p>
     </article>`
   );
 };

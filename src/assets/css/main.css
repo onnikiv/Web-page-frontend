@@ -157,17 +157,15 @@ header .header-buttons button:hover {
 
 #menu {
   display: grid;
-
   padding-top: 2%;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-#menu thead {
+#menu thead, #menu tbody {
   display: grid;
   width: 100%;
   padding-bottom: 1%;
-
   justify-content: center;
 }
 
@@ -194,19 +192,20 @@ header .header-buttons button:hover {
   font-size: large;
 }
 
+#menu .course {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  text-align: left;
+  width: 100%; /* Ensure the grid takes up the full width */
+  padding: 10px; /* Add padding for consistent spacing */
+  border-bottom: 1px solid #ccc; /* Optional: Add a border for separation */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+
 #menu tbody {
   display: grid;
-  width: 100%;
-  padding-bottom: 1%;
-
-  justify-content: center;
+  grid-template-columns: 1fr; /* Ensure each row spans the full width */
+  justify-content: center; /* Center the grid horizontally */
+  align-items: start; /* Align items to the top */
 }
-
-
-#menu .course {
-
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  text-align: left;
-}
-
