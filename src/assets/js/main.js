@@ -103,8 +103,8 @@ const createMenuHtml = (index) => {
         ({name, price, diets}) => `
       <article class="course">
         <p><strong>${name}</strong></p>
-        <p>Hinta: ${price || ''}</p>
-        <p>Allergeenit: ${diets}</p>
+        <p>${price || ''}</p>
+        <p>${diets}</p>
       </article>`
       )
       .join('') ||

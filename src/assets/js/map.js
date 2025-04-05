@@ -1,19 +1,25 @@
 /* eslint-disable no-undef */
 const markers = new Map();
 
-const map = L.map('map').setView([60.2144768, 25.0281984], 11);
+const map = L.map('map').setView([60.2144768, 25.0281984], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
+
+map.on('drag', () => {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.closePopup();
+    }
+  });
+});
 
 const addRestaurantsToMap = (restaurant) => {
   const {name, address, postalCode, city, phone, company} = restaurant;
   const coords = restaurant.location.coordinates;
   const latitude = coords[1];
   const longitude = coords[0];
-
-  console.log(coords[1], coords[0]);
   const marker = L.marker([latitude, longitude])
     .addTo(map)
     .bindPopup(
@@ -32,10 +38,11 @@ const changeMapView = (restaurant) => {
   const id = restaurant._id;
   const latitude = coords[1];
   const longitude = coords[0];
-  map.setView([latitude, longitude], 12);
+  map.setView([latitude, longitude], 13);
 
   const marker = markers.get(id);
   if (marker) {
+    marker.color = 'red';
     marker.openPopup();
   }
 };
