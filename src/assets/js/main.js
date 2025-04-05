@@ -4,13 +4,14 @@ import {
   getRestaurants,
   sortRestaurants,
   getRestaurantDailyMenu,
+  getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
 const table = document.getElementById('restaurant-box');
 const tableBodyTr = document.createElement('tr');
 const tableBody = document.querySelector('#menu tbody');
 const errorBox = document.getElementById('error');
-
+let dayIndex = 0;
 /* eslint-disable no-undef */
 const map = L.map('map').setView([60.2144768, 25.0281984], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -21,15 +22,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const fillWeekTable = () => {
   const dateObject = new Date();
   const weekDays = [
-    {name: 'Sunday', selected: false},
-    {name: 'Monday', selected: false},
-    {name: 'Tuesday', selected: false},
-    {name: 'Wednesday', selected: false},
-    {name: 'Thursday', selected: false},
-    {name: 'Friday', selected: false},
-    {name: 'Saturday', selected: false},
+    {id: 0, name: 'Monday', selected: false},
+    {id: 1, name: 'Tuesday', selected: false},
+    {id: 2, name: 'Wednesday', selected: false},
+    {id: 3, name: 'Thursday', selected: false},
+    {id: 4, name: 'Friday', selected: false},
+    {id: 5, name: 'Saturday', selected: false},
+    {id: 6, name: 'Sunday', selected: false},
   ];
-  const currentDay = weekDays[dateObject.getDay()];
+  const currentDay = weekDays[dateObject.getDate()];
   currentDay.selected = true;
   currentDay.name = 'Today';
 
@@ -52,6 +53,7 @@ const fillWeekTable = () => {
         const dayElement = document.getElementById(day.name);
         if (day.name === selectedDay.name) {
           day.selected = true;
+          console.log(day, ' TÄÄ');
           dayElement.classList.add('highlight');
         } else {
           day.selected = false;
@@ -59,7 +61,10 @@ const fillWeekTable = () => {
         }
       });
 
-      console.log(selectedDay);
+      console.log(selectedDay.id);
+      dayIndex = selectedDay.id;
+      console.log('Päivä nyt: ', dayIndex);
+
       weekDays.forEach((day) => console.log(day.name, day.selected));
     });
   });
@@ -118,7 +123,7 @@ const tableHeads = () => {
       </tr>`;
 };
 
-const fillTable = (filteredRestaurants) => {
+const fillTable = (filteredRestaurants, dayIndex) => {
   table.innerHTML = tableHeads();
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
@@ -129,7 +134,9 @@ const fillTable = (filteredRestaurants) => {
       row.classList.add('highlight');
 
       const menu = await getRestaurantDailyMenu(restaurant._id, 'fi');
+      const weektest = await getRestaurantWeeklyMenu(restaurant._id, 'en');
 
+      console.log(weektest.days[dayIndex]);
       tableBody.innerHTML = restaurantModal(restaurant, createMenuHtml(menu.courses));
     });
     table.appendChild(row);

@@ -12,7 +12,7 @@ const restaurantRow = (restaurant) => {
 const restaurantModal = (restaurant, menu) => {
   const {name, address, postalCode, city, phone, company} = restaurant;
 
-  const html = menu;
+  const html = name + menu;
   return html;
 };
 

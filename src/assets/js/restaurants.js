@@ -37,4 +37,4 @@ const sortRestaurants = () => {
   restaurants.sort(sortByName);
 };
 
-export {getRestaurants, getRestaurantDailyMenu, sortRestaurants};
+export {getRestaurants, getRestaurantDailyMenu, getRestaurantWeeklyMenu, sortRestaurants};
