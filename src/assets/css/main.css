@@ -89,26 +89,41 @@ header .header-buttons button:hover {
   color: rgb(116, 116, 116);
 }
 
+
+
+.center-body {
+  display: grid;
+  height: 500px;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 2px solid black;
+}
+.table-container {
+  max-height: 100%;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-right: 2px solid black;
+}
+
+#restaurant-box {
+  width: 100%;
+  border-collapse: collapse;
+}
+
 td {
   border-bottom: 1px solid #ccc;
   padding: 0.5em 1em;
 }
 
-.center-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 2px solid black;
-  font-size: 200%;
-}
 
-.restaurant-box {
-  height: 500px;
-  width: 33%;
+#map {
+  height: 100%;
+  width: 100%;
   padding: 0;
   position: fixed;
+  left: 0;
   display: block;
   position: relative;
-
+  border-right: 2px solid black;
 }
 
 #login-modal {
@@ -129,19 +144,22 @@ td {
   height: 100%;
 }
 
-#map {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  position: fixed;
-  left: 0;
-  display: block;
-  position: relative;
-}
 
 #menu a.highlight {
   color: red;
   background-color: #383838;
   font-weight: bold;
   font-size: large;
+}
+tr:nth-child(odd) {
+  background-color: rgb(255, 255, 255);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(218, 218, 218);
+}
+tr.highlight {
+  background-color: #383838;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
 }
