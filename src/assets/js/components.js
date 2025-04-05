@@ -17,14 +17,3 @@ const restaurantModal = (restaurant, menu) => {
 };
 
 export {restaurantRow, restaurantModal};
-
-/*
-<article class="restaurantInfo">
-      <h3>${name}</h3>
-      <p><strong>Address:</strong> ${address}</p>
-      <p><strong>Postal Code:</strong> ${postalCode}</p>
-      <p><strong>City:</strong> ${city}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Company:</strong> ${company}</p>
-      <h4>${'-'.repeat(40)} Menu ${'-'.repeat(40)}</h4>
-    </article>*/

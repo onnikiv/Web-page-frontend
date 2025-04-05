@@ -2,7 +2,7 @@ import {url} from './variables.js';
 import {fetchData, sortByName} from './utils.js';
 export let restaurants = [];
 
-export const getRestaurants = async () => {
+const getRestaurants = async () => {
   try {
     restaurants = await fetchData(url + '/restaurants');
   } catch (error) {
@@ -13,7 +13,7 @@ export const getRestaurants = async () => {
   }
 };
 
-export const getRestaurantMenu = async (id, lang) => {
+const getRestaurantDailyMenu = async (id, lang) => {
   try {
     return await fetchData(`${url}/restaurants/daily/${id}/${lang}`);
   } catch (error) {
@@ -23,6 +23,18 @@ export const getRestaurantMenu = async (id, lang) => {
   }
 };
 
-export const sortRestaurants = () => {
+const getRestaurantWeeklyMenu = async (id, lang) => {
+  try {
+    return await fetchData(`${url}/restaurants/weekly/${id}/${lang}`);
+  } catch (error) {
+    console.log(error);
+    errorBox.textContent = 'Failed to fetch weeks menu. Please try again later.';
+    errorBox.showModal();
+  }
+};
+
+const sortRestaurants = () => {
   restaurants.sort(sortByName);
 };
+
+export {getRestaurants, getRestaurantDailyMenu, sortRestaurants};

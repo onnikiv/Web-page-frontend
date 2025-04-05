@@ -3,57 +3,53 @@ import {
   restaurants,
   getRestaurants,
   sortRestaurants,
-  getRestaurantMenu,
+  getRestaurantDailyMenu,
 } from './restaurants.js';
 
 const table = document.getElementById('restaurant-box');
 const tableBodyTr = document.createElement('tr');
 const tableBody = document.querySelector('#menu tbody');
-
 const errorBox = document.getElementById('error');
 
 /* eslint-disable no-undef */
 const map = L.map('map').setView([60.2144768, 25.0281984], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
 const fillWeekTable = () => {
-  const userDate = new Date();
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const dayString = weekdays[userDate.getDay()];
+  const dateObject = new Date();
+  const weekDays = [
+    {name: 'Sunday', selected: false},
+    {name: 'Monday', selected: false},
+    {name: 'Tuesday', selected: false},
+    {name: 'Wednesday', selected: false},
+    {name: 'Thursday', selected: false},
+    {name: 'Friday', selected: false},
+    {name: 'Saturday', selected: false},
+  ];
+  const currentDay = weekDays[dateObject.getDay()];
+  currentDay.selected = true;
+  currentDay.name = 'Today';
 
-  const weekdayTableRows = document.querySelectorAll('.weekday');
+  const weekClass = document.querySelector('.week-day-names');
 
-  weekdayTableRows.forEach((row) => {
-    row.querySelectorAll('a').forEach((link) => {
-      if (link.id && link.textContent === dayString) {
-        link.classList.add('current-day');
-        link.innerText = `Today`;
-        link.classList.add('highlight');
-      }
-    });
+  // tungetaan weekClass elementit
+  weekDays.forEach((day) => {
+    weekClass.innerHTML += `<th><a id="${day.name}" href="#">${day.name}</a></th>`;
   });
+  // lisätään jokaiseen a elementtiin clickki
+  document.querySelectorAll('.week-day-names a').forEach((elem) => {
+    if (elem.id === 'Today') {
+      elem.classList.add('highlight');
+    }
+    elem.addEventListener('click', () => {
+      const selectedDay = weekDays.find((day) => day.name === elem.id);
+      selectedDay.selected = !selectedDay.selected;
 
-  weekdayTableRows.forEach((row) => {
-    row.querySelectorAll('a').forEach((link) => {
-      const selectedDay = link.textContent;
+      selectedDay.selected ? elem.classList.add('highlight') : elem.classList.remove('highlight');
       console.log(selectedDay);
-      link.addEventListener('click', () => {
-        if (link.classList.contains('highlight')) {
-          link.classList.remove('highlight');
-          console.log(link.classList);
-        } else {
-          document.querySelectorAll('.highlight').forEach((element) => {
-            element.classList.remove('highlight');
-          });
-        }
-        link.classList.add('highlight');
-
-        openMenuForDay(selectedDay);
-      });
     });
   });
 };
@@ -116,17 +112,12 @@ const fillTable = (filteredRestaurants) => {
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     row.addEventListener('click', async () => {
-      document
-        .querySelectorAll('.highlight')
-        .forEach((elem) => elem.classList.remove('highlight'));
+      document.querySelectorAll('.highlight').forEach((elem) => elem.classList.remove('highlight'));
       row.classList.add('highlight');
 
-      const menu = await getRestaurantMenu(restaurant._id, 'fi');
+      const menu = await getRestaurantDailyMenu(restaurant._id, 'fi');
 
-      tableBody.innerHTML = restaurantModal(
-        restaurant,
-        createMenuHtml(menu.courses)
-      );
+      tableBody.innerHTML = restaurantModal(restaurant, createMenuHtml(menu.courses));
     });
     table.appendChild(row);
   });
@@ -142,7 +133,6 @@ const companySelect = () => {
   const companySelect = document.querySelector('#company-select');
   companySelect.addEventListener('change', (event) => {
     const option = event.target.value;
-    console.log(filterRestaurants(option));
     const filteredRestaurants = filterRestaurants(option);
     fillTable(filteredRestaurants);
   });
