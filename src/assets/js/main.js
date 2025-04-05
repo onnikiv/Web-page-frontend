@@ -35,7 +35,7 @@ const fillWeekTable = () => {
     row.querySelectorAll('a').forEach((link) => {
       if (link.id && link.textContent === dayString) {
         link.classList.add('current-day');
-        link.innerHTML = `Today`;
+        link.innerText = `Today`;
       }
     });
   });
@@ -94,13 +94,15 @@ const createMenuHtml = (courses) => {
       .map(
         ({name, price, diets}) => `
         <article class="course">
-          <p><strong>${name}</strong>
+          <p><strong>${name}</strong></p>
           <p>Hinta: ${price || ''}</p>
           <p>Allergeenit: ${diets}</p>
         </article>
     `
       )
-      .join('') || '<td><p><strong>Menu unavailable.</strong></p></td>'
+      .join('') ||
+    `<article class="course">
+    <p><strong>Menu unavailable.</strong></p></article>`
   );
 };
 
