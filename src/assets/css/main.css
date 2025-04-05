@@ -59,38 +59,6 @@ header .header-buttons button:hover {
   transition: color 0.3s, color 0.3s;
 }
 
-
-#menu {
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin: 0 auto;
-  margin-top: 1%;
-  padding: 0;
-  table-layout: fixed;
-  text-align: center;
-}
-
-#menu a {
-  color: aliceblue;
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  padding: 0.5em 1em;
-  text-align: left;
-  font-weight: bolder;
-  background-color: blueviolet;
-  border-radius: 20%;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-#menu a:hover {
-  background-color: rgb(194, 129, 255);
-  color: rgb(116, 116, 116);
-}
-
-
-
 .center-body {
   display: grid;
   height: 500px;
@@ -108,9 +76,15 @@ header .header-buttons button:hover {
   width: 100%;
   border-collapse: collapse;
 }
+#restaurant-box thead {
+  position: sticky;
+  top: 0; /* Sticks to the top of the container */
+  z-index: 10; /* Ensures it stays above other content */
+  background-color: rgb(114, 114, 114); /* Set a background color to avoid transparency */
+}
 
-td {
-  border-bottom: 1px solid #ccc;
+#restaurant-box td {
+  border-bottom: 1px solid #000000;
   padding: 0.5em 1em;
 }
 
@@ -144,6 +118,40 @@ td {
   height: 100%;
 }
 
+#menu {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#menu thead {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+}
+
+#menu a {
+  color: aliceblue;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  padding: 0.5em 1em;
+  font-weight: bolder;
+  background-color: blueviolet;
+  border-radius: 20%;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#menu a:hover {
+  background-color: rgb(194, 129, 255);
+  color: rgb(116, 116, 116);
+}
 
 #menu a.highlight {
   color: red;
@@ -151,6 +159,12 @@ td {
   font-weight: bold;
   font-size: large;
 }
+
+#menu tbody tr {
+  display: flex;
+  flex-direction: column;
+}
+
 tr:nth-child(odd) {
   background-color: rgb(255, 255, 255);
 }

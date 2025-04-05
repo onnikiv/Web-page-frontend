@@ -1,11 +1,19 @@
-import {fetchData, sortByName} from './utils.js';
 import {restaurantRow, restaurantModal} from './components.js';
-import {url} from './variables.js';
+import {
+  restaurants,
+  getRestaurants,
+  sortRestaurants,
+  getRestaurantMenu,
+} from './restaurants.js';
 
 const table = document.getElementById('restaurant-box');
 const modal = document.querySelector('dialog');
+
+const tableBodyTr = document.createElement('tr');
+const tableBody = document.querySelector('#menu tbody');
+
 const errorBox = document.getElementById('error');
-let restaurants = [];
+
 /* eslint-disable no-undef */
 const map = L.map('map').setView([60.2144768, 25.0281984], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,12 +24,10 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const fillWeekTable = () => {
   const userDate = new Date();
-  console.log(userDate);
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const dayNum = userDate.getDate();
   const dayString = weekdays[userDate.getDay()];
   const month = userDate.getMonth() + 1;
-  console.log(dayString, month, dayNum);
 
   const weekdayTableRows = document.querySelectorAll('.weekday');
 
@@ -76,24 +82,10 @@ const loginElement = () => {
   });
 };
 
-const tableBodyTr = document.createElement('tr');
-
 const openMenuForDay = (selectedDay) => {
-  const tableBody = document.querySelector('tbody');
-  tableBodyTr.innerHTML = ``;
-  tableBodyTr.innerHTML = `TEST ${selectedDay}`;
-  tableBody.append(tableBodyTr);
-};
-
-const getRestaurants = async () => {
-  try {
-    restaurants = await fetchData(url + '/restaurants');
-  } catch (error) {
-    console.log(error);
-    errorBox.textContent =
-      'Failed to fetch restaurants. Please try again later. \n Be sure to be Connected to the schools network ';
-    errorBox.showModal();
-  }
+  tableBodyTr.innerText = ``;
+  tableBodyTr.innerText = `TEST ${selectedDay}`;
+  tableBody.append();
 };
 
 const createMenuHtml = (courses) => {
@@ -101,42 +93,20 @@ const createMenuHtml = (courses) => {
     courses
       .map(
         ({name, price, diets}) => `
-      <article class="course">
-        <p><strong>${name}</strong>,
-        Hinta: ${price || ''},
-        Allergeenit: ${diets}</p>
-      </article>
+      <td>
+        <article class="course">
+          <p><strong>${name}</strong>,
+          Hinta: ${price || ''},
+          Allergeenit: ${diets}</p>
+        </article>
+      </td>
     `
       )
-      .join('') || '<p><strong>Menu unavailable.</strong></p>'
+      .join('') || '<td><p><strong>Menu unavailable.</strong></p></td>'
   );
 };
 
-const getRestaurantMenu = async (id, lang) => {
-  try {
-    return await fetchData(`${url}/restaurants/daily/${id}/${lang}`);
-  } catch (error) {
-    console.log(error);
-    errorBox.textContent = 'Failed to fetch menu. Please try again later.';
-    errorBox.showModal();
-  }
-};
-
-export const sortRestaurants = () => {
-  restaurants.sort(sortByName);
-};
-
-const tableHeads = () => {
-  return `<tr>
-        <th>Name</th>
-        <th>Address</th>
-        <th>Company</th>
-      </tr>`;
-};
-
 const fillTable = (filteredRestaurants) => {
-  table.innerHTML = tableHeads();
-
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     row.addEventListener('click', async () => {
@@ -147,11 +117,10 @@ const fillTable = (filteredRestaurants) => {
 
       const menu = await getRestaurantMenu(restaurant._id, 'fi');
 
-      modal.innerHTML = restaurantModal(
+      tableBody.innerHTML = restaurantModal(
         restaurant,
         createMenuHtml(menu.courses)
       );
-      modal.showModal();
     });
     table.appendChild(row);
   });
