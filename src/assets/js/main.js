@@ -102,12 +102,12 @@ const createMenuHtml = (index) => {
       <article class="course">
         <p><strong>${name}</strong></p>
         <p>${price || ''}</p>
-        <p>${diets || ''}</p>
+        <p style="color: red;">${diets || ''}</p>
       </article>`
       )
       .join('') ||
     `<article class="course">
-      <p><strong>Menu unavailable for selected day</strong></p>
+      <p><strong style="color: red;">Menu unavailable for selected day</strong></p>
     </article>`
   );
 };
