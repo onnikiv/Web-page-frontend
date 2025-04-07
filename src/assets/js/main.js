@@ -64,7 +64,6 @@ const fillWeekTable = (weekDays) => {
 
   if (MEMORYNUMBER !== null) {
     const previousDay = document.getElementById(MEMORYNUMBER);
-    console.log(previousDay, 'perivus');
     if (previousDay) {
       previousDay.classList.add('highlight');
       tableBody.innerHTML = restaurantMenuItems(createMenuHtml(weekDays[MEMORYNUMBER]));
@@ -95,7 +94,6 @@ const loginElement = () => {
 
 const createMenuHtml = (index) => {
   const selectedDay = index.courses;
-  console.log(selectedDay, 'ASASDADSADSAS');
 
   return (
     selectedDay
@@ -148,7 +146,6 @@ const fillTable = (filteredRestaurants) => {
       tableBody.innerHTML = '';
 
       const weekMenu = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
-      console.log(weekMenu.days, 'VIIKON MENU KYSEISELTÄ RAVINTOLALTA');
       fillWeekTable(weekMenu.days);
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant);
