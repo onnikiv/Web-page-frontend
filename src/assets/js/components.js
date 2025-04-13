@@ -69,4 +69,25 @@ const tableHeads = (LANGUAGE) => {
       </thead>`;
 };
 
-export {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads};
+const loginElement = () => {
+  const loginButton = document.querySelector('#login');
+  const loginWindow = document.querySelector('#login-modal');
+  let open = false;
+  loginWindow.innerHTML = `
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+  `;
+
+  loginButton.addEventListener('click', () => {
+    open
+      ? ((loginWindow.style.display = 'none'), (open = false))
+      : ((loginWindow.style.display = 'block'), (open = true));
+  });
+};
+
+export {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads, loginElement};
