@@ -1,3 +1,4 @@
+import {addRestaurantsToMap, changeMapView} from './map.js';
 import {restaurantRow, restaurantMenuItems, getRestaurantInfo} from './components.js';
 import {
   restaurants,
@@ -6,8 +7,7 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
-import {addRestaurantsToMap, changeMapView} from './map.js';
-let LANGUAGE = 'en';
+export let LANGUAGE = document.documentElement.lang;
 
 const changeLanguage = () => {
   const languageButton = document.querySelector('#language-button');
@@ -15,12 +15,15 @@ const changeLanguage = () => {
   languageButton.addEventListener('click', () => {
     if (LANGUAGE === 'en') {
       LANGUAGE = 'fi';
+      document.documentElement.lang = 'fi';
       languageButton.innerText = 'FI';
     } else if (LANGUAGE === 'fi') {
       LANGUAGE = 'en';
+      document.documentElement.lang = 'en';
       languageButton.innerText = 'EN';
     }
     console.log('Language changed to:', LANGUAGE);
+    fillTable(restaurants, LANGUAGE);
   });
 };
 
@@ -101,7 +104,7 @@ const createMenuHtml = (index) => {
   );
 };
 
-const tableHeads = () => {
+const tableHeads = (LANGUAGE) => {
   return LANGUAGE === 'fi'
     ? `<thead>
         <tr>
@@ -119,8 +122,8 @@ const tableHeads = () => {
       </thead>`;
 };
 
-const fillTable = (filteredRestaurants) => {
-  table.innerHTML = tableHeads();
+const fillTable = (filteredRestaurants, LANGUAGE) => {
+  table.innerHTML = tableHeads(LANGUAGE);
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     addRestaurantsToMap(restaurant);
@@ -140,7 +143,7 @@ const fillTable = (filteredRestaurants) => {
       fillWeekTable(weekObject);
 
       const restaurantInfo = document.getElementById('restaurant-info');
-      restaurantInfo.innerHTML = getRestaurantInfo(restaurant);
+      restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
     });
     table.appendChild(row);
   });
@@ -163,11 +166,12 @@ const companySelect = () => {
 
 const main = async () => {
   try {
-    changeLanguage();
     loginElement();
     await getRestaurants();
     sortRestaurants();
-    fillTable(restaurants);
+
+    fillTable(restaurants, LANGUAGE);
+    changeLanguage();
     companySelect();
   } catch (error) {
     console.log(error);
