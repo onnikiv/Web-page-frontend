@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+
           alert('Login successful!');
           // Redirect or handle successful login
           // window.location.href = '/dashboard';
