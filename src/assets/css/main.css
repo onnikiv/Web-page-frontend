@@ -63,24 +63,33 @@ header .header-buttons button:hover {
 }
 
 .center-body {
+  position: relative;
   display: grid;
-  height: 500px;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 2px solid #333333;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 600px;
+  z-index: 1;
+  background: transparent;
+  border-bottom: 1px solid #000000;
 }
 .table-container {
   max-height: 100%;
   overflow-y: auto;
+  width: 120%;
   border: 1px solid #ccc;
   border-right: 2px solid #333333;
 }
 #restaurant-info {
   text-align: left;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  margin: 10px auto;
+  margin: 100px 0;
   flex-direction: column;
+  position: absolute;
+  right: 5%;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 
 #restaurant-box {
@@ -134,14 +143,12 @@ header .header-buttons button:hover {
 }
 
 #map {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  position: fixed;
+  position: absolute;
+  top: 0;
   left: 0;
-  display: block;
-  position: relative;
-  border-right: 2px solid #333333;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 #login-modal {
