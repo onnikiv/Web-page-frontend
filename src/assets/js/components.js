@@ -9,11 +9,6 @@ const restaurantRow = (restaurant) => {
   return tr;
 };
 
-const restaurantMenuItems = (menu) => {
-  const html = menu;
-  return html;
-};
-
 const getRestaurantInfo = (restaurant, LANGUAGE) => {
   const {name, address, postalCode, city, phone, company} = restaurant;
 
@@ -36,4 +31,42 @@ const getRestaurantInfo = (restaurant, LANGUAGE) => {
        </article>`;
 };
 
-export {restaurantRow, restaurantMenuItems, getRestaurantInfo};
+const createMenuHtml = (index) => {
+  const selectedDay = index.courses;
+
+  return (
+    selectedDay
+      .map(
+        ({name, price, diets}) => `
+      <article class="course">
+        <p><strong>${name}</strong></p>
+        <p>${price || ''}</p>
+        <p style="color: red;">${diets || ''}</p>
+      </article>`
+      )
+      .join('') ||
+    `<article class="course">
+      <p><strong>Menu unavailable for selected day</strong></p>
+    </article>`
+  );
+};
+
+const tableHeads = (LANGUAGE) => {
+  return LANGUAGE === 'fi'
+    ? `<thead>
+        <tr>
+          <th>Nimi</th>
+          <th>Osoite</th>
+          <th>Yritys</th>
+        </tr>
+      </thead>`
+    : `<thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Company</th>
+        </tr>
+      </thead>`;
+};
+
+export {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads};
