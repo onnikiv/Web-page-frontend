@@ -35,3 +35,11 @@ insert_final_newline = true
 # Maximum line length
 [*.{js,css,html}]
 max_line_length = 100
+
+# Exclude Markdown files from specific rules
+[*.md]
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = unset
+insert_final_newline = unset
+max_line_length = unset
