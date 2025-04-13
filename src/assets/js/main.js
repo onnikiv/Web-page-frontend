@@ -29,16 +29,12 @@ const changeLanguage = () => {
 
 const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('.selected-day-menu');
+const weekClass = document.querySelector('.week-day-names');
 export const errorBox = document.getElementById('error');
 
 const fillWeekTable = (weekObject) => {
-  const weekClass = document.querySelector('.week-day-names');
-  weekClass.innerHTML = '';
-
   const {days} = weekObject;
-  if (days.length === 0) {
-    weekClass.innerHTML = '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
-  }
+
   let index = 0;
   days.forEach((day) => {
     const th = document.createElement('th');
@@ -148,10 +144,17 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       tableBody.innerHTML = '';
 
       const weekObject = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
-      fillWeekTable(weekObject);
-
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
+      console.log(weekObject);
+      console.log(weekObject.days.length);
+      weekClass.innerHTML = '';
+      if (!weekObject || !weekObject?.days?.length) {
+        weekClass.innerHTML =
+          '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
+      } else {
+        fillWeekTable(weekObject);
+      }
     });
     table.appendChild(row);
   });

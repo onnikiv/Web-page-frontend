@@ -31,7 +31,6 @@ const getRestaurantWeeklyMenu = async (id, lang) => {
   } catch (error) {
     console.log(error);
     errorBox.textContent = 'Failed to fetch weeks menu. Please try again later.';
-    errorBox.showModal();
   }
 };
 
