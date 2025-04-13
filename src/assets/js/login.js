@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(username, password);
 
       try {
-        const response = await fetch('http://localhost:3001/api/v1/auth/login', {
+        const response = await fetch('https://10.120.32.69/web-page/api/v1/auth/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
