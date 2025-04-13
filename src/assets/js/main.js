@@ -1,5 +1,5 @@
 import {addRestaurantsToMap, changeMapView} from './map.js';
-import {restaurantRow, restaurantMenuItems, getRestaurantInfo} from './components.js';
+import {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads} from './components.js';
 import {
   restaurants,
   getRestaurants,
@@ -7,6 +7,10 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
+const table = document.getElementById('restaurant-box');
+const tableBody = document.querySelector('.selected-day-menu');
+const weekClass = document.querySelector('.week-day-names');
+export const errorBox = document.getElementById('error');
 export let LANGUAGE = document.documentElement.lang;
 
 const changeLanguage = () => {
@@ -26,11 +30,6 @@ const changeLanguage = () => {
     fillTable(restaurants, LANGUAGE);
   });
 };
-
-const table = document.getElementById('restaurant-box');
-const tableBody = document.querySelector('.selected-day-menu');
-const weekClass = document.querySelector('.week-day-names');
-export const errorBox = document.getElementById('error');
 
 const fillWeekTable = (weekObject) => {
   const {days} = weekObject;
@@ -61,7 +60,7 @@ const fillWeekTable = (weekObject) => {
         .querySelectorAll('.week-day-names a.highlight')
         .forEach((elem) => elem.classList.remove('highlight'));
       dayElement.classList.add('highlight');
-      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(day));
+      tableBody.innerHTML = createMenuHtml(day);
     });
 
     weekClass.appendChild(th);
@@ -88,44 +87,6 @@ const loginElement = () => {
       ? ((loginWindow.style.display = 'none'), (open = false))
       : ((loginWindow.style.display = 'block'), (open = true));
   });
-};
-
-const createMenuHtml = (index) => {
-  const selectedDay = index.courses;
-
-  return (
-    selectedDay
-      .map(
-        ({name, price, diets}) => `
-      <article class="course">
-        <p><strong>${name}</strong></p>
-        <p>${price || ''}</p>
-        <p style="color: red;">${diets || ''}</p>
-      </article>`
-      )
-      .join('') ||
-    `<article class="course">
-      <p><strong>Menu unavailable for selected day</strong></p>
-    </article>`
-  );
-};
-
-const tableHeads = (LANGUAGE) => {
-  return LANGUAGE === 'fi'
-    ? `<thead>
-        <tr>
-          <th>Nimi</th>
-          <th>Osoite</th>
-          <th>Yritys</th>
-        </tr>
-      </thead>`
-    : `<thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Company</th>
-        </tr>
-      </thead>`;
 };
 
 const fillTable = (filteredRestaurants, LANGUAGE) => {
