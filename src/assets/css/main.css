@@ -161,7 +161,7 @@ header .header-buttons button:hover {
   table-layout: fixed;
 }
 
-#menu thead {
+.week-day-names {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -182,29 +182,32 @@ header .header-buttons button:hover {
 
 #menu a:hover {
   background-color: rgb(194, 129, 255);
-  color: rgb(0, 102, 204);
+  color: rgb(0, 0, 0);
 }
 
 #menu a.highlight {
   color: red;
   background-color: #383838;
-  font-weight: bold;
-  font-size: large;
 }
 
-#menu tbody {
-  display: grid;
-  width: 100%;
-  padding-bottom: 1%;
-  justify-content: center;
+#menu a.highlight:hover {
+  background-color: #818181;
+  color: rgb(0, 102, 204);
 }
 
-#menu .course {
+.selected-day-menu {
+  text-align: center;
+  border-top: 1px solid rgb(179, 179, 179);
+  border-bottom: 1px solid rgb(179, 179, 179);
+}
+.course {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  text-align: left;
   justify-content: center;
-  width: 100%;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  margin-left: 20%;
+  margin-right: 15%;
+}
+
+.course p {
+  text-align: left;
 }
