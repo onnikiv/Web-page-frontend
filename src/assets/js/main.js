@@ -7,11 +7,12 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
+export const errorBox = document.getElementById('error');
+export let LANGUAGE = document.documentElement.lang;
+
 const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('.selected-day-menu');
 const weekClass = document.querySelector('.week-day-names');
-export const errorBox = document.getElementById('error');
-export let LANGUAGE = document.documentElement.lang;
 
 const changeLanguage = () => {
   const languageButton = document.querySelector('#language-button');
