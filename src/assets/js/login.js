@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
-      console.log(username, password);
 
       try {
         const response = await fetch('https://10.120.32.69/web-page/api/v1/auth/login', {
@@ -21,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
+          // eslint-disable-next-line no-unused-vars
           const data = await response.json();
 
           alert('Login successful!');
