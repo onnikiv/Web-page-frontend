@@ -37,17 +37,27 @@ const fillWeekTable = (weekObject) => {
 
   const {days} = weekObject;
   if (days.length === 0) {
-    console.log('tyhjää');
+    weekClass.innerHTML = '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
   }
   let index = 0;
   days.forEach((day) => {
     const th = document.createElement('th');
     const dayElement = document.createElement('a');
+    console.log(day);
+
+    const dayDisplayText = day.date.split(' ');
+    let d = dayDisplayText[0].substring(0, 2);
+    let dd = dayDisplayText[1];
+    const mm = new Date().getMonth() + 1;
+
+    LANGUAGE === 'fi'
+      ? (d = dayDisplayText[0].substring(0, 2))
+      : (d = dayDisplayText[0].substring(0, 3)) && (dd = dayDisplayText[1] + '.');
+
     dayElement.id = `${index}`;
     dayElement.href = '#';
-    dayElement.innerText = day.date;
+    dayElement.innerText = `${d} ${dd}${mm}`;
     th.appendChild(dayElement);
-    console.log(dayElement, ' DAYELEMENT');
 
     dayElement.addEventListener('click', (event) => {
       event.preventDefault();
@@ -138,8 +148,6 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       tableBody.innerHTML = '';
 
       const weekObject = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
-      console.log(weekObject);
-
       fillWeekTable(weekObject);
 
       const restaurantInfo = document.getElementById('restaurant-info');
