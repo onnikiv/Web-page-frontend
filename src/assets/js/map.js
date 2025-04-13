@@ -42,7 +42,6 @@ const changeMapView = (restaurant) => {
 
   const marker = markers.get(id);
   if (marker) {
-    marker.color = 'red';
     marker.openPopup();
   }
 };
