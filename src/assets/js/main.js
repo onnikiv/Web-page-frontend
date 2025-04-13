@@ -28,47 +28,36 @@ const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('.selected-day-menu');
 export const errorBox = document.getElementById('error');
 
-let MEMORYNUMBER = null;
-
-const fillWeekTable = (weekDays) => {
+const fillWeekTable = (weekObject) => {
   const weekClass = document.querySelector('.week-day-names');
   weekClass.innerHTML = '';
 
-  if (weekDays.length === 0) {
-    weekClass.innerHTML = `<article class="course">
-      <p><strong>Menu unavailable.</strong></p>
-    </article>`;
-    return;
+  const {days} = weekObject;
+  if (days.length === 0) {
+    console.log('tyhjää');
   }
+  let index = 0;
+  days.forEach((day) => {
+    const th = document.createElement('th');
+    const dayElement = document.createElement('a');
+    dayElement.id = `${index}`;
+    dayElement.href = '#';
+    dayElement.innerText = day.date;
+    th.appendChild(dayElement);
+    console.log(dayElement, ' DAYELEMENT');
 
-  let dayIndex = 0;
-  weekDays.forEach((day) => {
-    weekClass.innerHTML += `<th><a id="${dayIndex}" href="#">${day.date}</a></th>`;
-    dayIndex++;
-  });
-
-  document.querySelectorAll('.week-day-names a').forEach((elem) => {
-    elem.addEventListener('click', (event) => {
+    dayElement.addEventListener('click', (event) => {
       event.preventDefault();
-
-      document.querySelectorAll('.week-day-names a.highlight').forEach((link) => {
-        link.classList.remove('highlight');
-      });
-
-      MEMORYNUMBER = elem.id;
-      elem.classList.add('highlight');
-
-      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(weekDays[elem.id]));
+      document
+        .querySelectorAll('.week-day-names a.highlight')
+        .forEach((elem) => elem.classList.remove('highlight'));
+      dayElement.classList.add('highlight');
+      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(day));
     });
-  });
 
-  if (MEMORYNUMBER !== null) {
-    const previousDay = document.getElementById(MEMORYNUMBER);
-    if (previousDay) {
-      previousDay.classList.add('highlight');
-      tableBody.innerHTML = restaurantMenuItems(createMenuHtml(weekDays[MEMORYNUMBER]));
-    }
-  }
+    weekClass.appendChild(th);
+    index++;
+  });
 };
 
 const loginElement = () => {
@@ -107,7 +96,7 @@ const createMenuHtml = (index) => {
       )
       .join('') ||
     `<article class="course">
-      <p><strong style="color: red;">Menu unavailable for selected day</strong></p>
+      <p><strong>Menu unavailable for selected day</strong></p>
     </article>`
   );
 };
@@ -145,8 +134,11 @@ const fillTable = (filteredRestaurants) => {
 
       tableBody.innerHTML = '';
 
-      const weekMenu = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
-      fillWeekTable(weekMenu.days);
+      const weekObject = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
+      console.log(weekObject);
+
+      fillWeekTable(weekObject);
+
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant);
     });
