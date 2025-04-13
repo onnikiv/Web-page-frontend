@@ -1,4 +1,3 @@
-/* General styles */
 html {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   overflow-y: scroll;
@@ -9,17 +8,19 @@ body {
   background-color: #f9f9f9;
   margin: 0;
   padding: 0;
+  padding-bottom: 100%;
   color: #333333;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: #4caf50;
-  padding: 10px 20px;
-  color: #ffffff;
+  border-bottom: 2px solid #333333;
+  font-size: 100%;
+  transition-duration: 0.5s;
 }
+
 #page-title {
   display: flex;
   justify-content: center;
@@ -34,77 +35,12 @@ header {
   -webkit-text-stroke: 1px #333333;
 }
 
-header a {
+header p {
   color: #ffffff;
-  text-decoration: none;
-  font-size: 1.5em;
-}
-
-header a:focus {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
-header .header-buttons button {
-  height: 40px;
-  color: #ffffff;
-  background-color: #2196f3;
-  cursor: pointer;
-  border-radius: 5px;
-}
-header .header-buttons button:hover {
-  color: #333333;
-  background-color: #1976d2;
-}
-
-header .header-buttons button:focus {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-}
-
-header .header-buttons button:hover {
-  color: #333333;
-  background-color: #1976d2;
-}
-
-#login-form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#login-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-#login-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#login-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-}
-
-#login-form button:hover {
-  background-color: #45a049;
+  font-size: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
