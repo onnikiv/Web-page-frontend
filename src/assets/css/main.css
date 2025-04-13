@@ -234,3 +234,13 @@ header .header-buttons button:hover {
 .course p {
   text-align: left;
 }
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
