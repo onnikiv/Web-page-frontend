@@ -80,7 +80,7 @@ header .header-buttons button:hover {
 }
 #restaurant-info {
   text-align: left;
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: flex-start;
   margin: 100px 0;
@@ -160,7 +160,7 @@ header .header-buttons button:hover {
   top: 12%;
   left: 73%;
   z-index: 1000;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
 }
 #login-form {
   display: flex;

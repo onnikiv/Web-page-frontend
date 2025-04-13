@@ -93,6 +93,7 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       const weekObject = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
+      restaurantInfo.style.display = 'block';
       console.log(weekObject);
       weekClass.innerHTML = '';
       if (!weekObject || !weekObject?.days?.length) {
