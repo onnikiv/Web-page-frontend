@@ -7,14 +7,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-map.on('drag', () => {
-  map.eachLayer((layer) => {
-    if (layer instanceof L.Marker) {
-      layer.closePopup();
-    }
-  });
-});
-
 const addRestaurantsToMap = (restaurant) => {
   const {name, address, postalCode, city, phone, company} = restaurant;
   const coords = restaurant.location.coordinates;
