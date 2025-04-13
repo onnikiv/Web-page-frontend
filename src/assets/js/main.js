@@ -94,7 +94,6 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
       console.log(weekObject);
-      console.log(weekObject.days.length);
       weekClass.innerHTML = '';
       if (!weekObject || !weekObject?.days?.length) {
         weekClass.innerHTML =
