@@ -1,11 +1,5 @@
 import {addRestaurantsToMap, changeMapView} from './map.js';
-import {
-  restaurantRow,
-  getRestaurantInfo,
-  createMenuHtml,
-  tableHeads,
-  loginElement,
-} from './components.js';
+import {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads} from './components.js';
 import {
   restaurants,
   getRestaurants,
@@ -124,7 +118,6 @@ const companySelect = () => {
 
 const main = async () => {
   try {
-    loginElement();
     await getRestaurants();
     sortRestaurants();
 
