@@ -1,0 +1,100 @@
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 100%;
+  color: #333333;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #4caf50;
+  border-bottom: 2px solid #333333;
+  font-size: 100%;
+  transition-duration: 0.5s;
+}
+
+#page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+#page-title:hover {
+  color: #ffc107;
+  -webkit-text-stroke: 1px #333333;
+}
+
+header p {
+  color: #ffffff;
+  font-size: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  border: 1px solid #b3b3b3;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#register-form {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  gap: 15px;
+}
+
+#register-form input {
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#register-form input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+#register-form button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#register-form button:hover {
+  background-color: #45a049;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
