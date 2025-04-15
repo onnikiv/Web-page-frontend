@@ -43,6 +43,52 @@ header p {
   align-items: center;
 }
 
+.login-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  border: 1px solid #b3b3b3;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#login-form {
+  display: grid;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  gap: 15px;
+}
+
+#login-form input {
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#login-form input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+#login-form button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#login-form button:hover {
+  background-color: #45a049;
+}
+
 footer {
   text-align: center;
   padding: 10px;
