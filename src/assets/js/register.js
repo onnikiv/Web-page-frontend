@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('register-form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (event) => {
+  const registerForm = document.getElementById('register-form');
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const name = document.getElementById('name').value.trim();
@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
           alert(`Registration failed: ${errorData.message || 'Unknown error'}`);
         }
       } catch (error) {
-        //console.error('Error during registration:', error);
+        console.error('Error during registration:', error);
         alert('An error occurred. Please try again later.');
       }
     });
   } else {
-    //console.error('Register form element not found.');
+    console.error('Register form element not found.');
   }
 });

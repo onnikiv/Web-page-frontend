@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const registerForm = document.getElementById('login-form');
-  if (registerForm) {
-    registerForm.addEventListener('submit', async (event) => {
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const username = document.getElementById('username').value;
