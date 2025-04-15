@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://users.metropolia.fi/~onnikiv/Web-Sovelluskehitys/web-page/src/assets/images/spoon.jpg"
+    />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <script src="assets/js/register.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <a id="page-title" href="./index.html">Student Restaurants</a>
+      <p></p>
+    </header>
+
+    <div class="register-container">
+      <form id="register-form">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr />
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required />
+
+        <label for="name"><b>Name</b></label>
+        <input type="name" placeholder="Enter Name" name="name" id="name" required />
+
+        <label for="username"><b>Username</b></label>
+        <input
+          type="username"
+          placeholder="Enter Username"
+          name="username"
+          id="username"
+          required
+        />
+
+        <label for="password"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="password"
+          required
+        />
+
+        <label for="password-repeat"><b>Repeat Password</b></label>
+        <input
+          type="password"
+          placeholder="Repeat Password"
+          name="password-repeat"
+          id="password-repeat"
+          required
+        />
+        <hr />
+        <button type="submit" class="register-button">Register</button>
+      </form>
+      <p class="register-link">Already have an account? <a href="./login.html">Login here</a>.</p>
+    </div>
+    <footer>
+      <p>&copy; 2025 Student Restaurants</p>
+    </footer>
+  </body>
+</html>
