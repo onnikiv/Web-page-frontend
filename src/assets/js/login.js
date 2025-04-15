@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
+
   if (loginForm) {
     loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -20,11 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          // eslint-disable-next-line no-unused-vars
           const data = await response.json();
 
-          alert('Login successful!');
-          // window.location.href = '/index.html';
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', username);
+          localStorage.setItem('id', data.user.user_id);
+
+          window.location.href = './index.html';
         } else {
           alert('Login failed. Please check your credentials.');
         }
