@@ -24,8 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = await response.json();
 
           alert('Login successful!');
-          // Redirect or handle successful login
-          // window.location.href = '/dashboard';
+          // window.location.href = '/index.html';
         } else {
           alert('Login failed. Please check your credentials.');
         }

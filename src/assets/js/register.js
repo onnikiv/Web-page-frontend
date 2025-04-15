@@ -36,18 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           const data = await response.json();
-          alert('Registration successful!');
+          alert('Registration successful! User added!');
           // window.location.href = '/index.html';
         } else {
           const errorData = await response.json();
           alert(`Registration failed: ${errorData.message || 'Unknown error'}`);
         }
       } catch (error) {
-        console.error('Error during registration:', error);
+        //console.error('Error during registration:', error);
         alert('An error occurred. Please try again later.');
       }
     });
   } else {
-    console.error('Register form element not found.');
+    //console.error('Register form element not found.');
   }
 });

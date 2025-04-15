@@ -27,7 +27,6 @@ const changeLanguage = () => {
       document.documentElement.lang = 'en';
       languageButton.innerText = 'EN';
     }
-    console.log('Language changed to:', LANGUAGE);
     fillTable(restaurants, LANGUAGE);
   });
 };
@@ -39,7 +38,6 @@ const fillWeekTable = (weekObject) => {
   days.forEach((day) => {
     const th = document.createElement('th');
     const dayElement = document.createElement('a');
-    console.log(day);
 
     const dayDisplayText = day.date.split(' ');
     let d = dayDisplayText[0].substring(0, 2);
@@ -88,7 +86,6 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       const restaurantInfo = document.getElementById('restaurant-info');
       restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
       restaurantInfo.style.display = 'block';
-      console.log(weekObject);
       weekClass.innerHTML = '';
       if (!weekObject || !weekObject?.days?.length) {
         weekClass.innerHTML =
