@@ -71,7 +71,6 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
   table.innerHTML = tableHeads(LANGUAGE);
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
-    addRestaurantsToMap(restaurant);
     row.addEventListener('click', async () => {
       document
         .querySelectorAll('#restaurant-box tr.highlight')
@@ -113,9 +112,16 @@ const companySelect = () => {
   });
 };
 
+const putRestaurantsToMap = (restaurants) => {
+  restaurants.forEach((restaurant) => {
+    addRestaurantsToMap(restaurant);
+  });
+};
+
 const main = async () => {
   try {
     await getRestaurants();
+    putRestaurantsToMap(restaurants);
     sortRestaurants();
 
     fillTable(restaurants, LANGUAGE);
