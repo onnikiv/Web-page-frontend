@@ -1,8 +1,5 @@
 import {getRestaurantInfo} from './components.js';
-import getLanguage from './language.js';
-import {fillWeekTable} from './main.js';
-import {getRestaurantWeeklyMenu} from './restaurants.js';
-
+import {fetchRestaurantWeekMenu} from './main.js';
 /* eslint-disable no-undef */
 const markers = new Map();
 
@@ -19,7 +16,7 @@ const addRestaurantsToMap = (restaurants) => {
     const longitude = coords[0];
     const marker = L.marker([latitude, longitude])
       .addTo(map)
-      .on('click', () => openRestaurantInfo(restaurant))
+      .on('click', () => openRestaurantByClick(restaurant))
       .bindPopup(getRestaurantInfo(restaurant));
     markers.set(restaurant._id, marker);
   });
@@ -38,12 +35,9 @@ const changeMapView = async (restaurant) => {
   }
 };
 
-const openRestaurantInfo = async (restaurant) => {
+const openRestaurantByClick = async (restaurant) => {
   if (restaurant) {
-    console.log(restaurant.name);
-    fillWeekTable(await getRestaurantWeeklyMenu(restaurant._id, getLanguage()));
-  } else {
-    console.error('Restaurant not found');
+    fetchRestaurantWeekMenu(restaurant);
   }
 };
 
