@@ -13,7 +13,8 @@ const headerElements = () => {
   }
 };
 headerElements();
-const restaurantRow = (restaurant) => {
+
+const createRestaurantRowHtml = (restaurant) => {
   const tr = document.createElement('tr');
   const {name, address, company} = restaurant;
   tr.innerHTML = `
@@ -46,27 +47,27 @@ const getRestaurantInfo = (restaurant) => {
        </article>`;
 };
 
-const createMenuHtml = (index) => {
-  const selectedDay = index.courses;
+const createMenuHtml = (day) => {
+  const selectedDay = day.courses;
 
   if (!selectedDay || selectedDay.length === 0) {
     return getLanguage() === 'fi'
-      ? `<article class="course">
-           <p><strong>Päivän menu ei saatavilla</strong></p>
-         </article>`
-      : `<article class="course">
-           <p><strong>Menu unavailable for selected day</strong></p>
-         </article>`;
+      ? `<tr class="course">
+           <td><strong>Päivän menu ei ole saatavilla.</strong></td>
+         </tr>`
+      : `<tr class="course">
+           <td><strong>Menu unavailable for selected day</strong></td>
+         </tr>`;
   }
 
   return selectedDay
     .map(
       ({name, price, diets}) => `
-      <article class="course">
-        <p><strong>${name}</strong></p>
-        <p>${price || ''}</p>
-        <p style="color: red;">${diets || ''}</p>
-      </article>`
+      <tr class="course">
+        <td><strong>${name}</strong></td>
+        <td>${price || ''}</td>
+        <td style="color: red;">${diets || ''}</td>
+      </tr>`
     )
     .join('');
 };
@@ -89,4 +90,4 @@ const tableHeads = () => {
       </thead>`;
 };
 
-export {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads};
+export {createRestaurantRowHtml, getRestaurantInfo, createMenuHtml, tableHeads};
