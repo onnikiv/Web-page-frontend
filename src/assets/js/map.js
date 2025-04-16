@@ -15,13 +15,13 @@ const addRestaurantsToMap = (restaurants) => {
     const longitude = coords[0];
     const marker = L.marker([latitude, longitude])
       .addTo(map)
-      .on('click', () => openRestaurantByClick(restaurant, coords))
-      .bindPopup(`<h3>${restaurant.name}</h3>`);
+      .bindPopup(`<h3>${restaurant.name}</h3>`)
+      .on('click', () => openRestaurantByClick(restaurant));
     markers.set(restaurant._id, marker);
   });
 };
 
-const changeMapView = async (restaurant) => {
+const changeMapView = (restaurant) => {
   const coords = restaurant.location.coordinates;
   const id = restaurant._id;
   const latitude = coords[1];
@@ -30,6 +30,7 @@ const changeMapView = async (restaurant) => {
 
   map.setView([latitude, longitude], 13);
   marker.openPopup();
+
   highlightMarker(coords);
 };
 
@@ -44,14 +45,14 @@ const highlightMarker = (coords) => {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
-    radius: 250,
+    radius: 200,
   }).addTo(map);
 };
 
-const openRestaurantByClick = (restaurant, coords) => {
+const openRestaurantByClick = (restaurant) => {
   if (restaurant) {
     fetchRestaurantWeekMenu(restaurant);
-    highlightMarker(coords);
+    changeMapView(restaurant);
   }
 };
 

@@ -6,7 +6,7 @@
  * @returns {Promise<Object>} The JSON response from the fetch request.
  * @throws {Error} If the response is not ok.
  */
-export async function fetchData(url, options = {}) {
+async function fetchData(url, options = {}) {
   try {
     const response = await fetch(url, options);
     const json = await response.json();
@@ -30,6 +30,8 @@ export async function fetchData(url, options = {}) {
   }
 }
 
-export const sortByName = (a, b) => {
+const sortByName = (a, b) => {
   return a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1;
 };
+
+export {sortByName, fetchData};
