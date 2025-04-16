@@ -86,7 +86,7 @@ const createRestaurantRows = (filteredRestaurants) => {
   table.innerHTML = tableHeads(getLanguage());
   filteredRestaurants.forEach((restaurant) => {
     const row = createRestaurantRowHtml(restaurant);
-    row.addEventListener('click', async () => {
+    row.addEventListener('click', () => {
       document
         .querySelectorAll('#restaurant-box tr.highlight')
         .forEach((elem) => elem.classList.remove('highlight'));
@@ -124,8 +124,6 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
         getLanguage() === 'fi'
           ? '<p><strong>Viikon menu ei ole saatavilla.</strong></p>'
           : '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
-
-      return;
     } else {
       createMenu(weekObject);
     }

@@ -223,6 +223,26 @@ header .header-buttons button:hover {
   border-top: 1px solid #b3b3b3;
   border-bottom: 1px solid #b3b3b3;
 }
+.selected-day-menu th {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  margin-top: 10%;
+  margin-left: 20%;
+  margin-right: 15%;
+  background-color: #2196f3;
+  color: #ffffff; /* White text */
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.selected-day-menu th:hover {
+  background-color: #8e24aa;
+  transform: scale(1.05);
+}
+
 .course {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -231,8 +251,10 @@ header .header-buttons button:hover {
   margin-right: 15%;
 }
 
-.course p {
+.course td {
   text-align: left;
+  border: 1px solid #b3b3b3;
+  border-bottom: none;
 }
 
 footer {
