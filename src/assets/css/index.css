@@ -88,7 +88,7 @@ header .header-buttons button:hover {
   transition: color 0.3s, color 0.3s;
 }
 
-.center-body {
+.center-container {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -177,7 +177,7 @@ header .header-buttons button:hover {
   z-index: -1;
 }
 
-#menu {
+.menu-container {
   display: grid;
   padding-top: 2%;
   border-collapse: collapse;
@@ -192,7 +192,7 @@ header .header-buttons button:hover {
   padding-bottom: 1%;
 }
 
-#menu a {
+.menu-container a {
   color: #ffffff;
   font-weight: normal;
   padding: 0.5em 1em;
@@ -203,17 +203,17 @@ header .header-buttons button:hover {
   transition: background-color 0.3s, color 0.3s;
 }
 
-#menu a:hover {
+.menu-container a:hover {
   background-color: #225324;
   color: #ffffff;
 }
 
-#menu a.highlight {
+.menu-container a.highlight {
   color: #ffffff;
   background-color: #ffc107;
 }
 
-#menu a.highlight:hover {
+.menu-container a.highlight:hover {
   background-color: #ffb300;
   color: #333333;
 }
