@@ -1,5 +1,10 @@
 import {addRestaurantsToMap, changeMapView} from './map.js';
-import {restaurantRow, getRestaurantInfo, createMenuHtml, tableHeads} from './components.js';
+import {
+  createRestaurantRowHtml,
+  getRestaurantInfo,
+  createMenuHtml,
+  tableHeads,
+} from './components.js';
 import {
   restaurants,
   getRestaurants,
@@ -12,44 +17,72 @@ import getLanguage from './language.js';
 export const errorBox = document.getElementById('error');
 
 const table = document.getElementById('restaurant-box');
-const tableBody = document.querySelector('.selected-day-menu');
-const weekClass = document.querySelector('.week-day-names');
+const menuHeadings = document.querySelector('.menu-headings');
+const menuItems = document.querySelector('.selected-day-menu');
 
-export const fillWeekTable = (weekObject) => {
-  console.log(weekObject, ' weekobject');
-  weekClass.innerHTML = '';
-  const {days} = weekObject;
+const createMenu = (weekObject) => {
+  menuHeadings.innerHTML = '';
 
-  let index = 0;
-  days.forEach((day) => {
-    const th = document.createElement('th');
-    const dayElement = document.createElement('a');
+  console.log(weekObject, ' TESTI');
 
-    const dayDisplayText = day.date.split(' ');
-    let d = dayDisplayText[0].substring(0, 2);
-    let dd = dayDisplayText[1];
+  const amountOfDays = weekObject.days.length;
+
+  const language = getLanguage();
+  let weekButtonCreated = false;
+
+  for (let i = 0; i < amountOfDays; i++) {
+    // luodaan kokoviikon menunappula
+    if (!weekButtonCreated) {
+      const weekText = language === 'fi' ? 'Koko viikko' : 'Whole Week';
+      const weekA = `<th><a id="${i - 1}" href="">${weekText}</a></th>`;
+
+      menuHeadings.innerHTML += weekA;
+      weekButtonCreated = true;
+    }
+    // heti perään maanantai
+    const dayObject = weekObject.days[i];
+    const dayText = dayObject.date.split(' ');
+    let d = dayText[0].substring(0, 2);
+    let dd = dayText[1];
     const mm = new Date().getMonth() + 1;
 
-    getLanguage() === 'fi'
-      ? (d = dayDisplayText[0].substring(0, 2))
-      : (d = dayDisplayText[0].substring(0, 3)) && (dd = dayDisplayText[1] + '.');
+    language === 'fi'
+      ? (d = dayText[0].substring(0, 2))
+      : (d = dayText[0].substring(0, 3)) && (dd = dayText[1] + '.');
 
-    dayElement.id = `${index}`;
-    dayElement.href = '#';
-    dayElement.innerText = `${d} ${dd}${mm}`;
-    th.appendChild(dayElement);
+    const dayA = `<th><a id="${i}" href="">${d} ${dd}${mm}</a></th>`;
+    menuHeadings.innerHTML += dayA;
+  }
+  // täällä luodaan clickit menu napeille
+  createMenuEventListeners(weekObject);
+};
 
-    dayElement.addEventListener('click', (event) => {
-      event.preventDefault();
+const createMenuEventListeners = (weekObject) => {
+  console.log(weekObject, ' WÄÄ');
+
+  const {days} = weekObject;
+  console.log(days, ' DAYs');
+
+  document.querySelectorAll('.menu-headings a').forEach((a) => {
+    a.addEventListener('click', (event) => {
       document
-        .querySelectorAll('.week-day-names a.highlight')
+        .querySelectorAll('.menu-headings a')
         .forEach((elem) => elem.classList.remove('highlight'));
-      dayElement.classList.add('highlight');
-      tableBody.innerHTML = createMenuHtml(day);
-    });
 
-    weekClass.appendChild(th);
-    index++;
+      event.preventDefault();
+      menuItems.innerHTML = '';
+      // -1 = kokoviikon menu
+      if (a.id === '-1') {
+        for (let i = 0; i < days.length; i++) {
+          menuItems.innerHTML += `<th>${days[i].date}</th>`;
+          menuItems.innerHTML += createMenuHtml(days[i]);
+        }
+      } else {
+        menuItems.innerHTML += `<th>${days[a.id].date}</th>`;
+        menuItems.innerHTML += createMenuHtml(days[a.id]);
+      }
+      a.classList.add('highlight');
+    });
   });
 };
 
@@ -57,7 +90,7 @@ const createRestaurantRows = (filteredRestaurants) => {
   console.log('CreateRestaurantrows');
   table.innerHTML = tableHeads(getLanguage());
   filteredRestaurants.forEach((restaurant) => {
-    const row = restaurantRow(restaurant);
+    const row = createRestaurantRowHtml(restaurant);
     row.addEventListener('click', async () => {
       document
         .querySelectorAll('#restaurant-box tr.highlight')
@@ -65,28 +98,43 @@ const createRestaurantRows = (filteredRestaurants) => {
       row.classList.add('highlight');
 
       changeMapView(restaurant);
-
-      tableBody.innerHTML = '';
-      thisRestaurant(restaurant);
+      fetchRestaurantWeekMenu(restaurant);
     });
     table.appendChild(row);
   });
 };
 
-const thisRestaurant = async (restaurant) => {
-  // haetaan kyseisen ravintolan viikkomenu + kieli
-  const weekObject = await getRestaurantWeeklyMenu(restaurant._id, getLanguage());
+export const fetchRestaurantWeekMenu = async (restaurant) => {
+  // putsataan näyttö
+  menuHeadings.innerHTML = '';
+  menuItems.innerHTML = '';
+
+  console.log(restaurant, ' res');
   const restaurantInfo = document.getElementById('restaurant-info');
   restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
   restaurantInfo.style.display = 'block';
-  weekClass.innerHTML = '';
-  if (!weekObject || !weekObject?.days?.length) {
-    weekClass.innerHTML =
-      getLanguage() === 'fi'
-        ? '<p><strong>Viikon menu ei saatavilla.</strong></p>'
-        : '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
-  } else {
-    fillWeekTable(weekObject);
+
+  try {
+    const weekObject = await getRestaurantWeeklyMenu(restaurant._id, getLanguage());
+    console.log(weekObject, ' weekobjektiiiiiiiiiiiiiii');
+
+    if (
+      !weekObject ||
+      weekObject === null ||
+      weekObject === undefined ||
+      weekObject.days.length === 0
+    ) {
+      menuHeadings.innerHTML =
+        getLanguage() === 'fi'
+          ? '<p><strong>Viikon menu ei ole saatavilla.</strong></p>'
+          : '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
+
+      return;
+    } else {
+      createMenu(weekObject);
+    }
+  } catch (error) {
+    console.log('fetchRestaurantWeekMenu: ', error);
   }
 };
 
