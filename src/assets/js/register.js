@@ -1,3 +1,9 @@
+import {createHeaderElements} from './components.js';
+import getLanguage from './language.js';
+
+getLanguage();
+createHeaderElements();
+
 document.addEventListener('DOMContentLoaded', () => {
   const registerForm = document.getElementById('register-form');
   if (registerForm) {

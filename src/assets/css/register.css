@@ -10,7 +10,7 @@ body {
   background-color: #f9f9f9;
   margin: 0;
   padding: 0;
-  padding-bottom: 100%;
+  padding-bottom: 20%;
   color: #333333;
 }
 
@@ -36,13 +36,57 @@ header {
   color: #ffc107;
   -webkit-text-stroke: 1px #333333;
 }
-
 header p {
   color: #ffffff;
   font-size: 150%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+header .header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 20%;
+}
+
+header .header-buttons button {
+  height: 40px;
+  color: #ffffff;
+  background-color: #2196f3;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 5px;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+header .header-buttons button:hover {
+  color: #333333;
+  background-color: #1976d2;
+  transition: color 0.3s, color 0.3s;
+}
+
+#login {
+  text-decoration: none;
+  height: 40px;
+  color: #ffffff;
+  background-color: #2196f3;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+#login:hover {
+  color: #333333;
+  background-color: #1976d2;
+  transition: color 0.3s, color 0.3s;
 }
 
 .register-container {
