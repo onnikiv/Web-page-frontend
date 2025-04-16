@@ -28,7 +28,7 @@ const getRestaurantInfo = (restaurant) => {
   const {name, address, postalCode, city, phone, company} = restaurant;
 
   return getLanguage() === 'fi'
-    ? `<article class="restaurantInfo">
+    ? `<article class="restaurant-info">
           <h3>${name}</h3>
           <p><strong>Osoite:</strong> ${address}</p>
           <p><strong>Postinumero:</strong> ${postalCode}</p>
@@ -36,7 +36,7 @@ const getRestaurantInfo = (restaurant) => {
           <p><strong>Puh:</strong> ${phone}</p>
           <p><strong>Yritys:</strong> ${company}</p>
        </article>`
-    : `<article class="restaurantInfo">
+    : `<article class="restaurant-info">
           <h3>${name}</h3>
           <p><strong>Address:</strong> ${address}</p>
           <p><strong>Postal Code:</strong> ${postalCode}</p>
