@@ -31,7 +31,8 @@ const changeLanguage = () => {
   });
 };
 
-const fillWeekTable = (weekObject) => {
+export const fillWeekTable = (weekObject) => {
+  console.log(weekObject, ' weekobject');
   const {days} = weekObject;
 
   let index = 0;

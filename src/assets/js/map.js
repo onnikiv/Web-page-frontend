@@ -1,3 +1,6 @@
+import {fillWeekTable} from './main.js';
+import {getRestaurantWeeklyMenu, restaurants} from './restaurants.js';
+
 /* eslint-disable no-undef */
 const markers = new Map();
 
@@ -8,12 +11,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const addRestaurantsToMap = (restaurant) => {
-  const {name, address, postalCode, city, phone, company} = restaurant;
-  const coords = restaurant.location.coordinates;
+  const restaurantObject = restaurant;
+  const {name, address, postalCode, city, phone, company} = restaurantObject;
+  const coords = restaurantObject.location.coordinates;
   const latitude = coords[1];
   const longitude = coords[0];
   const marker = L.marker([latitude, longitude])
     .addTo(map)
+    .on('click', () => changeMapView(restaurant))
     .bindPopup(
       `<h3>${name}</h3>
       <p><strong>Address:</strong> ${address}</p>
@@ -25,16 +30,28 @@ const addRestaurantsToMap = (restaurant) => {
   markers.set(restaurant._id, marker);
 };
 
-const changeMapView = (restaurant) => {
+const changeMapView = async (restaurant) => {
   const coords = restaurant.location.coordinates;
   const id = restaurant._id;
   const latitude = coords[1];
   const longitude = coords[0];
   map.setView([latitude, longitude], 13);
+  console.log('changeMapView', restaurant);
+
+  const LANGUAGE = 'fi';
 
   const marker = markers.get(id);
+
   if (marker) {
     marker.openPopup();
+
+    const restaurantData = restaurants.find((r) => r._id === id);
+    if (restaurantData) {
+      fillWeekTable(await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE));
+      console.log('TÄÄ');
+    } else {
+      console.error('Restaurant not found');
+    }
   }
 };
 

@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           const data = await response.json();
           alert('Registration successful! User added!');
-          // window.location.href = '/index.html';
+          window.location.href = './login.html';
         } else {
           const errorData = await response.json();
           alert(`Registration failed: ${errorData.message || 'Unknown error'}`);
