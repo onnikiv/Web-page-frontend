@@ -7,32 +7,17 @@ import {
   getRestaurantWeeklyMenu,
 } from './restaurants.js';
 
+import getLanguage from './language.js';
+
 export const errorBox = document.getElementById('error');
-export let LANGUAGE = document.documentElement.lang;
 
 const table = document.getElementById('restaurant-box');
 const tableBody = document.querySelector('.selected-day-menu');
 const weekClass = document.querySelector('.week-day-names');
 
-const changeLanguage = () => {
-  const languageButton = document.querySelector('#language-button');
-  languageButton.textContent = LANGUAGE.toUpperCase();
-  languageButton.addEventListener('click', () => {
-    if (LANGUAGE === 'en') {
-      LANGUAGE = 'fi';
-      document.documentElement.lang = 'fi';
-      languageButton.innerText = 'FI';
-    } else if (LANGUAGE === 'fi') {
-      LANGUAGE = 'en';
-      document.documentElement.lang = 'en';
-      languageButton.innerText = 'EN';
-    }
-    fillTable(restaurants, LANGUAGE);
-  });
-};
-
 export const fillWeekTable = (weekObject) => {
   console.log(weekObject, ' weekobject');
+  weekClass.innerHTML = '';
   const {days} = weekObject;
 
   let index = 0;
@@ -45,7 +30,7 @@ export const fillWeekTable = (weekObject) => {
     let dd = dayDisplayText[1];
     const mm = new Date().getMonth() + 1;
 
-    LANGUAGE === 'fi'
+    getLanguage() === 'fi'
       ? (d = dayDisplayText[0].substring(0, 2))
       : (d = dayDisplayText[0].substring(0, 3)) && (dd = dayDisplayText[1] + '.');
 
@@ -68,8 +53,9 @@ export const fillWeekTable = (weekObject) => {
   });
 };
 
-const fillTable = (filteredRestaurants, LANGUAGE) => {
-  table.innerHTML = tableHeads(LANGUAGE);
+const createRestaurantRows = (filteredRestaurants) => {
+  console.log('CreateRestaurantrows');
+  table.innerHTML = tableHeads(getLanguage());
   filteredRestaurants.forEach((restaurant) => {
     const row = restaurantRow(restaurant);
     row.addEventListener('click', async () => {
@@ -81,21 +67,27 @@ const fillTable = (filteredRestaurants, LANGUAGE) => {
       changeMapView(restaurant);
 
       tableBody.innerHTML = '';
-
-      const weekObject = await getRestaurantWeeklyMenu(restaurant._id, LANGUAGE);
-      const restaurantInfo = document.getElementById('restaurant-info');
-      restaurantInfo.innerHTML = getRestaurantInfo(restaurant, LANGUAGE);
-      restaurantInfo.style.display = 'block';
-      weekClass.innerHTML = '';
-      if (!weekObject || !weekObject?.days?.length) {
-        weekClass.innerHTML =
-          '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
-      } else {
-        fillWeekTable(weekObject);
-      }
+      thisRestaurant(restaurant);
     });
     table.appendChild(row);
   });
+};
+
+const thisRestaurant = async (restaurant) => {
+  // haetaan kyseisen ravintolan viikkomenu + kieli
+  const weekObject = await getRestaurantWeeklyMenu(restaurant._id, getLanguage());
+  const restaurantInfo = document.getElementById('restaurant-info');
+  restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
+  restaurantInfo.style.display = 'block';
+  weekClass.innerHTML = '';
+  if (!weekObject || !weekObject?.days?.length) {
+    weekClass.innerHTML =
+      getLanguage() === 'fi'
+        ? '<p><strong>Viikon menu ei saatavilla.</strong></p>'
+        : '<p><strong>Menu unavailable for the selected restaurant.</strong></p>';
+  } else {
+    fillWeekTable(weekObject);
+  }
 };
 
 const filterRestaurants = (type) => {
@@ -109,24 +101,17 @@ const companySelect = () => {
   companySelect.addEventListener('change', (event) => {
     const option = event.target.value;
     const filteredRestaurants = filterRestaurants(option);
-    fillTable(filteredRestaurants);
-  });
-};
-
-const putRestaurantsToMap = (restaurants) => {
-  restaurants.forEach((restaurant) => {
-    addRestaurantsToMap(restaurant);
+    createRestaurantRows(filteredRestaurants);
   });
 };
 
 const main = async () => {
   try {
     await getRestaurants();
-    putRestaurantsToMap(restaurants);
+    addRestaurantsToMap(restaurants);
     sortRestaurants();
 
-    fillTable(restaurants, LANGUAGE);
-    changeLanguage();
+    createRestaurantRows(restaurants);
     companySelect();
   } catch (error) {
     console.log(error);
