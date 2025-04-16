@@ -48,7 +48,7 @@ const getRestaurantInfo = (restaurant) => {
 
 const createMenuHtml = (day) => {
   const selectedDay = day.courses;
-  console.log(day.date);
+
   if (!selectedDay || selectedDay.length === 0) {
     return getLanguage() === 'fi'
       ? `<tr class="course">
