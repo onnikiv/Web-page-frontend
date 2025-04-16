@@ -4,6 +4,7 @@ import {
   getRestaurantInfo,
   createMenuHtml,
   tableHeads,
+  createHeaderElements,
 } from './components.js';
 import {
   restaurants,
@@ -106,7 +107,10 @@ const createRestaurantRows = (filteredRestaurants) => {
 
 export const fetchRestaurantWeekMenu = async (restaurant) => {
   // putsataan näyttö
-  menuHeadings.innerHTML = '';
+  menuHeadings.innerHTML =
+    getLanguage() === 'fi'
+      ? `<h4>Haetaan Ravintolan Menua...</h4>`
+      : `<h4>Fetching Restaurant's Menu...</h4>`;
   menuItems.innerHTML = '';
 
   console.log(restaurant, ' res');
@@ -154,6 +158,8 @@ const companySelect = () => {
 };
 
 const main = async () => {
+  createHeaderElements();
+
   try {
     await getRestaurants();
     addRestaurantsToMap(restaurants);

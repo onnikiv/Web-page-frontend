@@ -1,5 +1,4 @@
-import {getRestaurantInfo} from './components.js';
-import {fetchRestaurantWeekMenu} from './main.js';
+import {fetchRestaurantWeekMenu} from './index.js';
 /* eslint-disable no-undef */
 const markers = new Map();
 
@@ -16,8 +15,8 @@ const addRestaurantsToMap = (restaurants) => {
     const longitude = coords[0];
     const marker = L.marker([latitude, longitude])
       .addTo(map)
-      .on('click', () => openRestaurantByClick(restaurant))
-      .bindPopup(getRestaurantInfo(restaurant));
+      .on('click', () => openRestaurantByClick(restaurant, coords))
+      .bindPopup(`<h3>${restaurant.name}</h3>`);
     markers.set(restaurant._id, marker);
   });
 };
@@ -27,17 +26,32 @@ const changeMapView = async (restaurant) => {
   const id = restaurant._id;
   const latitude = coords[1];
   const longitude = coords[0];
-  map.setView([latitude, longitude], 13);
-
   const marker = markers.get(id);
-  if (marker) {
-    marker.openPopup();
-  }
+
+  map.setView([latitude, longitude], 13);
+  marker.openPopup();
+  highlightMarker(coords);
 };
 
-const openRestaurantByClick = async (restaurant) => {
+const highlightMarker = (coords) => {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Circle) {
+      map.removeLayer(layer);
+    }
+  });
+  // eslint-disable-next-line no-unused-vars
+  const circle = L.circle([coords[1], coords[0]], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 250,
+  }).addTo(map);
+};
+
+const openRestaurantByClick = (restaurant, coords) => {
   if (restaurant) {
     fetchRestaurantWeekMenu(restaurant);
+    highlightMarker(coords);
   }
 };
 

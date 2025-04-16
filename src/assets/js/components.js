@@ -1,6 +1,6 @@
 import getLanguage from './language.js';
 
-const headerElements = () => {
+const createHeaderElements = () => {
   const headerTitle = document.getElementById('page-title');
   const loginBtnText = document.getElementById('login');
 
@@ -12,7 +12,6 @@ const headerElements = () => {
     loginBtnText.innerText = 'Log in';
   }
 };
-headerElements();
 
 const createRestaurantRowHtml = (restaurant) => {
   const tr = document.createElement('tr');
@@ -90,4 +89,10 @@ const tableHeads = () => {
       </thead>`;
 };
 
-export {createRestaurantRowHtml, getRestaurantInfo, createMenuHtml, tableHeads};
+export {
+  createRestaurantRowHtml,
+  getRestaurantInfo,
+  createMenuHtml,
+  tableHeads,
+  createHeaderElements,
+};
