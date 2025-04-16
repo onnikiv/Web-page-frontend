@@ -1,3 +1,63 @@
+import {createHeaderElements} from './components.js';
+import getLanguage from './language.js';
+
+const createLoginContainer = () => {
+  const loginContainer = document.querySelector('.login-container');
+
+  let englishInputs = {
+    1: 'Username',
+    2: 'Enter your username',
+    3: 'Password',
+    4: 'Enter your password',
+    5: 'Login',
+    6: "Don't have an account?",
+    7: 'Register here',
+  };
+
+  let finnishInputs = {
+    1: 'Käyttäjänimi',
+    2: 'Syötä käyttäjänimi',
+    3: 'Salasana',
+    4: 'Syötä salasana',
+    5: 'Kirjaudu',
+    6: 'Eikö sinulla ole tiliä?',
+    7: 'Rekisteröidy tästä',
+  };
+
+  getLanguage() === 'fi' ? (englishInputs = finnishInputs) : englishInputs;
+
+  loginContainer.innerHTML = `
+    <h1>${englishInputs[5]}</h1>
+    <form id="login-form">
+      <label for="username"><b>${englishInputs[1]}</b></label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="${englishInputs[2]}"
+        required
+      />
+      <label for="password"><b>${englishInputs[3]}</b></label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="${englishInputs[4]}"
+        required
+      />
+
+      <button type="submit">${englishInputs[5]}</button>
+    </form>
+    <p class="register-link">
+      ${englishInputs[6]}<a href="./register.html">${englishInputs[7]}</a>.
+    </p>
+  `;
+};
+
+createLoginContainer();
+getLanguage();
+createHeaderElements();
+
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
 
