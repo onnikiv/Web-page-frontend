@@ -184,7 +184,7 @@ header .header-buttons button:hover {
   table-layout: fixed;
 }
 
-.week-day-names {
+.menu-headings {
   display: flex;
   flex-direction: row;
   width: 100%;
