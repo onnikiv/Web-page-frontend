@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
+          // eslint-disable-next-line no-unused-vars
           const data = await response.json();
           alert('Registration successful! User added!');
           window.location.href = './login.html';

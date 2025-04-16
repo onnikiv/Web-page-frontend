@@ -8,7 +8,6 @@ languageButton.addEventListener('click', () => {
   LANGUAGE = LANGUAGE === 'fi' ? 'en' : 'fi';
   document.documentElement.lang = LANGUAGE;
   languageButton.textContent = LANGUAGE.toUpperCase();
-  console.log('kieli vaihdettu ->', LANGUAGE);
   localStorage.setItem('LANGUAGE', LANGUAGE);
   location.reload();
 });

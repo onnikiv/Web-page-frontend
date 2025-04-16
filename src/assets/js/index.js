@@ -24,8 +24,6 @@ const menuItems = document.querySelector('.selected-day-menu');
 const createMenu = (weekObject) => {
   menuHeadings.innerHTML = '';
 
-  console.log(weekObject, ' TESTI');
-
   const amountOfDays = weekObject.days.length;
 
   const language = getLanguage();
@@ -59,10 +57,7 @@ const createMenu = (weekObject) => {
 };
 
 const createMenuEventListeners = (weekObject) => {
-  console.log(weekObject, ' WÄÄ');
-
   const {days} = weekObject;
-  console.log(days, ' DAYs');
 
   document.querySelectorAll('.menu-headings a').forEach((a) => {
     a.addEventListener('click', (event) => {
@@ -88,7 +83,6 @@ const createMenuEventListeners = (weekObject) => {
 };
 
 const createRestaurantRows = (filteredRestaurants) => {
-  console.log('CreateRestaurantrows');
   table.innerHTML = tableHeads(getLanguage());
   filteredRestaurants.forEach((restaurant) => {
     const row = createRestaurantRowHtml(restaurant);
@@ -113,14 +107,12 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
       : `<h4>Fetching Restaurant's Menu...</h4>`;
   menuItems.innerHTML = '';
 
-  console.log(restaurant, ' res');
   const restaurantInfo = document.getElementById('restaurant-info');
   restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
   restaurantInfo.style.display = 'block';
 
   try {
     const weekObject = await getRestaurantWeeklyMenu(restaurant._id, getLanguage());
-    console.log(weekObject, ' weekobjektiiiiiiiiiiiiiii');
 
     if (
       !weekObject ||
