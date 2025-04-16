@@ -19,7 +19,14 @@ export async function fetchData(url, options = {}) {
     return json;
   } catch (error) {
     console.error('Fetch error:', error);
-    throw error;
+    console.warn(
+      `Olet nähtävästi klikannut johonkin HAMK ravintolaan \n
+      /weekly/ haku ei yksinkertaisesti vain toimi HAMK ravintoloihin.
+      Korjaus olisi hakea HAMK ravintolat /daily/ fetchillä, mikä tuottaa
+      tulosta, mutta olisi turhaa sillä objekti on anyway tyhjä.
+      Toivottavasti API korjataan tulevaisuudessa.
+    `
+    );
   }
 }
 
