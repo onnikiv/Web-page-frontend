@@ -10,7 +10,7 @@ const getRestaurants = async () => {
   } catch (error) {
     console.log(error);
     errorBox.textContent =
-      'Failed to fetch restaurants. Please try again later. \n Be sure to be Connected to the schools network ';
+      'Failed to fetch restaurants. \n Be sure to be Connected to the schools network ';
     errorBox.showModal();
   }
 };
@@ -20,7 +20,8 @@ const getRestaurantDailyMenu = async (id, lang) => {
     return await fetchData(`${url}/restaurants/daily/${id}/${lang}`);
   } catch (error) {
     console.log(error);
-    errorBox.textContent = 'Failed to fetch menu. Please try again later.';
+    errorBox.textContent =
+      'Failed to fetch menu. \n Be sure to be Connected to the schools network ';
     errorBox.showModal();
   }
 };
@@ -30,7 +31,8 @@ const getRestaurantWeeklyMenu = async (id, lang) => {
     return await fetchData(`${url}/restaurants/weekly/${id}/${lang}`);
   } catch (error) {
     console.log(error);
-    errorBox.textContent = 'Failed to fetch weeks menu. Please try again later.';
+    errorBox.textContent =
+      'Failed to fetch weeks menu. \n Be sure to be Connected to the schools network ';
   }
 };
 
