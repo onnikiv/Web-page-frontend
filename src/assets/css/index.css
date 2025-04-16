@@ -58,9 +58,10 @@ header .header-buttons button {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   margin: 0 5px;
-  border-radius: 5px;
   padding: 0 10px;
+  border-radius: 5px;
 }
+
 header .header-buttons button:hover {
   color: #333333;
   background-color: #1976d2;
@@ -68,17 +69,18 @@ header .header-buttons button:hover {
 }
 
 #login {
+  border: #333333 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 20%;
   text-decoration: none;
-  height: 40px;
+  height: 37px;
   color: #ffffff;
   background-color: #2196f3;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #333333;
+  margin: 0 5px;
   border-radius: 5px;
   padding: 0 10px;
 }
@@ -92,19 +94,29 @@ header .header-buttons button:hover {
 .center-container {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 600px;
-  z-index: 1;
-  background: transparent;
-  border-bottom: 1px solid #000000;
+  grid-template-columns: 0.5fr 1fr; /* RAVINTOLALISTA - MAPPI*/
+  height: 650px;
+  border: 5px solid #333333;
+  background-color: #333333;
+  gap: 5px;
 }
+
 .table-container {
   max-height: 100%;
   overflow-y: auto;
-  width: 120%;
+  width: 100%;
   border: 1px solid #ccc;
   border-right: 2px solid #333333;
+  z-index: 1;
+  padding: 0%;
 }
+
+#map {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
 #restaurant-info {
   display: none;
   text-align: left;
@@ -116,6 +128,7 @@ header .header-buttons button:hover {
   right: 2%;
   background-color: #ffffff;
   border: 1px solid #000000;
+  z-index: 1;
 }
 
 .restaurant-info {
@@ -123,15 +136,13 @@ header .header-buttons button:hover {
   grid-template-columns: 1fr;
   width: 100%;
   box-sizing: border-box;
-  width: 300px; /* Set a static width */
-  height: auto; /* Allow height to grow based on content */
-  overflow: visible; /* Ensure content is not clipped */
+  height: auto;
 }
 
 #restaurant-box {
-  width: 100%;
   border-collapse: collapse;
   padding: 0;
+  left: 50%;
 }
 #restaurant-box thead {
   position: sticky;
@@ -139,14 +150,16 @@ header .header-buttons button:hover {
   z-index: 10;
   text-align: left;
   background-color: #4caf50;
-  border-bottom: 1px solid #333333;
 }
 
-#restaurant-box th {
+#restaurant-box thead th {
   border-bottom: 1px solid #333333;
+  background-color: #4caf50;
+  padding: 0;
 }
 
 #restaurant-box tr {
+  border-bottom: 1px solid #333333;
   height: 2%;
 }
 
@@ -166,15 +179,6 @@ header .header-buttons button:hover {
   background-color: #ffc107;
   font-weight: bold;
   color: #333333;
-}
-
-#map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
 }
 
 .menu-container {
@@ -239,6 +243,7 @@ header .header-buttons button:hover {
 
 .selected-day-menu th:hover {
   background-color: #8e24aa;
+  cursor: pointer;
   transform: scale(1.05);
 }
 
@@ -266,7 +271,7 @@ header .header-buttons button:hover {
 
 footer {
   text-align: center;
-  padding: 10px;
+  padding: 0;
   background-color: #4caf50;
   color: #ffffff;
   position: fixed;

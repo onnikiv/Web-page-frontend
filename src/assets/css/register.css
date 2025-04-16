@@ -58,9 +58,10 @@ header .header-buttons button {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   margin: 0 5px;
-  border-radius: 5px;
   padding: 0 10px;
+  border-radius: 5px;
 }
+
 header .header-buttons button:hover {
   color: #333333;
   background-color: #1976d2;
@@ -68,17 +69,18 @@ header .header-buttons button:hover {
 }
 
 #login {
+  border: #333333 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-right: 20%;
   text-decoration: none;
-  height: 40px;
+  height: 37px;
   color: #ffffff;
   background-color: #2196f3;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #333333;
+  margin: 0 5px;
   border-radius: 5px;
   padding: 0 10px;
 }
@@ -136,7 +138,7 @@ header .header-buttons button:hover {
 
 footer {
   text-align: center;
-  padding: 10px;
+  padding: 0;
   background-color: #4caf50;
   color: #ffffff;
   position: fixed;
