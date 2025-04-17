@@ -15,11 +15,11 @@ const createHeaderElements = () => {
 
 const createRestaurantRowHtml = (restaurant) => {
   const tr = document.createElement('tr');
-  const {name, address, company} = restaurant;
+  const {name, city, company} = restaurant;
   tr.innerHTML = `
     <td>${name}</td>
-    <td>${address}</td>
     <td>${company}</td>
+    <td>${city}</td>
   `;
   return tr;
 };
@@ -76,15 +76,15 @@ const tableHeads = () => {
     ? `<thead>
         <tr>
           <th>Nimi</th>
-          <th>Osoite</th>
           <th>Yritys</th>
+          <th>Kaupunki</th>
         </tr>
       </thead>`
     : `<thead>
         <tr>
           <th>Name</th>
-          <th>Address</th>
           <th>Company</th>
+          <th>City</th>
         </tr>
       </thead>`;
 };
