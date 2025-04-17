@@ -1,6 +1,6 @@
+import {createRestaurantRows} from '../pages/index.js';
 import {restaurants} from './restaurants.js';
-import {createRestaurantRows} from './index.js';
-import getLanguage from './language.js';
+import getLanguage from '../utils/language.js';
 
 const filterRestaurantsByCompany = (type) => {
   return type === 'All'

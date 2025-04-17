@@ -1,4 +1,4 @@
-import {fetchRestaurantWeekMenu} from './index.js';
+import {fetchRestaurantWeekMenu} from './pages/index.js';
 /* eslint-disable no-undef */
 const markers = new Map();
 

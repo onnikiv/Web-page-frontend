@@ -1,6 +1,7 @@
-import {fetchData, sortByName} from './utils.js';
-import {errorBox} from './index.js';
-import {url} from './variables.js';
+import {fetchData} from '../utils/fetchData.js';
+import {errorBox} from '../pages/index.js';
+import {url} from '../utils/variables.js';
+import {sortByName} from '../utils/sortByName.js';
 
 let restaurants = [];
 

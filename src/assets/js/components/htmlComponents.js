@@ -1,4 +1,4 @@
-import getLanguage from './language.js';
+import getLanguage from '../utils/language.js';
 
 const createHeaderElements = () => {
   const headerTitle = document.getElementById('page-title');

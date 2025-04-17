@@ -1,5 +1,5 @@
-import {createHeaderElements} from './components.js';
-import getLanguage from './language.js';
+import {createHeaderElements} from '../components/htmlComponents.js';
+import getLanguage from '../utils/language.js';
 
 const createRegisterContainer = () => {
   const registerContainer = document.querySelector('.register-container');

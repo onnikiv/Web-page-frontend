@@ -1,20 +1,20 @@
-import {addRestaurantsToMap, changeMapView} from './map.js';
+import {addRestaurantsToMap, changeMapView} from '../map.js';
 import {
+  createHeaderElements,
   createRestaurantRowHtml,
   getRestaurantInfo,
   createMenuHtml,
   tableHeads,
-  createHeaderElements,
-} from './components.js';
+} from '../components/htmlComponents.js';
 import {
   restaurants,
   getRestaurants,
   sortRestaurants,
   getRestaurantWeeklyMenu,
-} from './restaurants.js';
+} from '../components/restaurants.js';
 
-import getLanguage from './language.js';
-import {companySelect, citySelect, populateSelectElements} from './selectElements.js';
+import getLanguage from '../utils/language.js';
+import {companySelect, citySelect, populateSelectElements} from '../components/selectElements.js';
 
 export const errorBox = document.getElementById('error');
 
