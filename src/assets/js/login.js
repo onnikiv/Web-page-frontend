@@ -4,7 +4,7 @@ import getLanguage from './language.js';
 const createLoginContainer = () => {
   const loginContainer = document.querySelector('.login-container');
 
-  let englishInputs = {
+  let initialInputs = {
     1: 'Username',
     2: 'Enter your username',
     3: 'Password',
@@ -24,39 +24,35 @@ const createLoginContainer = () => {
     7: 'Rekisteröidy tästä',
   };
 
-  getLanguage() === 'fi' ? (englishInputs = finnishInputs) : englishInputs;
+  getLanguage() === 'fi' ? (initialInputs = finnishInputs) : initialInputs;
 
   loginContainer.innerHTML = `
-    <h1>${englishInputs[5]}</h1>
+    <h1>${initialInputs[5]}</h1>
     <form id="login-form">
-      <label for="username"><b>${englishInputs[1]}</b></label>
+      <label for="username"><b>${initialInputs[1]}</b></label>
       <input
         type="text"
         id="username"
         name="username"
-        placeholder="${englishInputs[2]}"
+        placeholder="${initialInputs[2]}"
         required
       />
-      <label for="password"><b>${englishInputs[3]}</b></label>
+      <label for="password"><b>${initialInputs[3]}</b></label>
       <input
         type="password"
         id="password"
         name="password"
-        placeholder="${englishInputs[4]}"
+        placeholder="${initialInputs[4]}"
         required
       />
 
-      <button type="submit">${englishInputs[5]}</button>
+      <button type="submit">${initialInputs[5]}</button>
     </form>
     <p class="register-link">
-      ${englishInputs[6]}<a href="./register.html">${englishInputs[7]}</a>.
+      ${initialInputs[6]} <a href="./register.html">${initialInputs[7]}</a>.
     </p>
   `;
 };
-
-createLoginContainer();
-getLanguage();
-createHeaderElements();
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
@@ -100,3 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Login form element not found.');
   }
 });
+
+createLoginContainer();
+getLanguage();
+createHeaderElements();
