@@ -1,8 +1,75 @@
 import {createHeaderElements} from './components.js';
 import getLanguage from './language.js';
 
-getLanguage();
-createHeaderElements();
+const createRegisterContainer = () => {
+  const registerContainer = document.querySelector('.register-container');
+
+  let inputs = {
+    1: 'Register',
+    2: 'Please fill in this form to create an account.',
+    3: 'DO NOT USE YOUR REAL PASSWORDS WHEN REGISTERING THIS IS A SCHOOL PROJECT',
+    4: 'Enter',
+    5: 'Email',
+    6: 'Name',
+    7: 'Username',
+    8: 'Password',
+    9: 'Repeat',
+    10: 'Already have an account?',
+    11: 'Login here',
+  };
+
+  let finnishInputs = {
+    1: 'Rekisteröidy',
+    2: 'Täytä tämä lomake luodaksesi tilin.',
+    3: 'ÄLÄ KÄYTÄ OIKEITA SALASANOJASI REKISTERÖITYESSÄSI TÄMÄ ON KOULUPROJEKTI',
+    4: 'Syötä',
+    5: 'Sähköposti',
+    6: 'Nimi',
+    7: 'Käyttäjänimi',
+    8: 'Salasana',
+    9: 'Toista',
+    10: 'Onko sinulla jo tili?',
+    11: 'Kirjaudu tästä',
+  };
+
+  getLanguage() === 'fi' ? (inputs = finnishInputs) : inputs;
+
+  registerContainer.innerHTML = `<form id="register-form">
+        <h1>${inputs[1]}</h1>
+        <p>${inputs[2]}</p>
+        <strong>${inputs[3]}</strong>
+        <label for="email"><b>${inputs[5]}</b></label>
+        <input type="text" placeholder="${inputs[4]} ${inputs[5]}" name="email" id="email" required />
+        <label for="name"><b>${inputs[6]}</b></label>
+        <input type="name" placeholder="${inputs[4]} ${inputs[6]}" name="name" id="name" required />
+        <label for="username"><b>Username</b></label>
+        <input
+          type="username"
+          placeholder="${inputs[4]} ${inputs[7]}"
+          name="username"
+          id="username"
+          required
+        />
+        <label for="password"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="${inputs[4]} ${inputs[8]}"
+          name="password"
+          id="password"
+          required
+        />
+        <label for="password-repeat"><b>${inputs[9]} ${inputs[8]}</b></label>
+        <input
+          type="password"
+          placeholder="${inputs[9]} ${inputs[8]}"
+          name="password-repeat"
+          id="password-repeat"
+          required
+        />
+        <button type="submit">${inputs[1]}</button>
+      </form>
+      <p class="register-link">${inputs[10]} <a href="./login.html">${inputs[11]}</a>.</p>`;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const registerForm = document.getElementById('register-form');
@@ -58,3 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Register form element not found.');
   }
 });
+
+getLanguage();
+createHeaderElements();
+createRegisterContainer();
