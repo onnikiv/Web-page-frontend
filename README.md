@@ -1,3 +1,15 @@
+# TODO vielä...
+
+1. Lisätä nappula joka näyttää lähimmän ravintolan
+2. Profiili-sivu
+3. Profiili-sivun ominaisuudet
+   - Omien tietojen muokkaus
+   - Kuvan lisääminen/vaihtaminen
+4. Suosikkiravintolan asettaminen
+5. Profiilikuvan tallentaminen ja hakeminen tietokannasta käyttäjälle
+
+Muuten aikalailla donski :)
+
 # Ongelmat
 
 1. Kun fetchataan minkä tahansa `Stadin AO` opiskelijaravintoloiden viikkoruoat englanniksi niin Objektin attribuutti `name` on tyhjä. Suomeksi hakemalla Objekti on kuitenkin niinkuin halutaan.
