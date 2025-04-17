@@ -161,6 +161,7 @@ header .header-buttons button:hover {
 #restaurant-box tr {
   border-bottom: 1px solid #333333;
   height: 2%;
+  cursor: pointer;
 }
 
 #restaurant-box td {
