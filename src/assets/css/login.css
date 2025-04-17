@@ -1,72 +1,4 @@
-html {
-  font-family: monospace;
-  font-size: x-large;
-  overflow-y: scroll;
-}
-
-body {
-  font-family: monospace;
-  font-size: x-large;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 20%;
-  color: #333333;
-}
-
-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: #4caf50;
-  border-bottom: 2px solid #333333;
-  font-size: 100%;
-  transition-duration: 0.5s;
-}
-
-#page-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 150%;
-  color: #ffffff;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
-}
-#page-title:hover {
-  color: #ffc107;
-  -webkit-text-stroke: 1px #333333;
-}
-header p {
-  color: #ffffff;
-  font-size: 150%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header .header-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  padding-right: 20%;
-}
-
-header .header-buttons button {
-  height: 40px;
-  color: #ffffff;
-  background-color: #2196f3;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 0 5px;
-  padding: 0 10px;
-  border-radius: 5px;
-}
-
-header .header-buttons button:hover {
-  color: #333333;
-  background-color: #1976d2;
-  transition: color 0.3s, color 0.3s;
-}
+@import url('./index.css');
 
 #login {
   border: #333333 2px solid;
@@ -135,14 +67,4 @@ header .header-buttons button:hover {
 
 #login-form button:hover {
   background-color: #45a049;
-}
-
-footer {
-  text-align: center;
-  padding: 0;
-  background-color: #4caf50;
-  color: #ffffff;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
