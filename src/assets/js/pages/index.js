@@ -13,10 +13,9 @@ import {
   getRestaurantWeeklyMenu,
 } from '../components/restaurants.js';
 
+import {createNearestButton} from '../components/userLocation.js';
 import getLanguage from '../utils/language.js';
 import {companySelect, citySelect, populateSelectElements} from '../components/selectElements.js';
-
-export const errorBox = document.getElementById('error');
 
 const table = document.getElementById('restaurant-box');
 const menuHeadings = document.querySelector('.menu-headings');
@@ -138,6 +137,7 @@ const main = async () => {
   companySelect();
   citySelect();
   populateSelectElements();
+  createNearestButton();
 
   try {
     await getRestaurants();
