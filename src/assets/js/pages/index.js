@@ -1,4 +1,7 @@
+import getLanguage from '../utils/language.js';
+import {createNearestButton} from '../components/userLocation.js';
 import {addRestaurantsToMap, changeMapView} from '../map.js';
+import {companySelect, citySelect, populateSelectElements} from '../components/selectElements.js';
 import {
   createHeaderElements,
   createRestaurantRowHtml,
@@ -12,10 +15,7 @@ import {
   sortRestaurants,
   getRestaurantWeeklyMenu,
 } from '../components/restaurants.js';
-
-import {createNearestButton} from '../components/userLocation.js';
-import getLanguage from '../utils/language.js';
-import {companySelect, citySelect, populateSelectElements} from '../components/selectElements.js';
+import {profileIcon} from '../utils/logged.js';
 
 const table = document.getElementById('restaurant-box');
 const menuHeadings = document.querySelector('.menu-headings');
@@ -133,6 +133,7 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
 };
 
 const main = async () => {
+  profileIcon();
   createHeaderElements();
   companySelect();
   citySelect();
