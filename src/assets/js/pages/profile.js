@@ -63,7 +63,6 @@ const createProfileContainer = () => {
   uploadButton.addEventListener('click', async (event) => {
     event.preventDefault();
     const file = thumbnailInput.files[0];
-    console.log(file);
     if (!file) {
       alert('Please select a file to upload.');
       return;
@@ -88,6 +87,7 @@ const createProfileContainer = () => {
       }
 
       const result = await response.json();
+
       alert('Thumbnail uploaded successfully!');
       console.log('Thumbnail uploaded successfully:', result);
     } catch (error) {
