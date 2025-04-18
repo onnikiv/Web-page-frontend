@@ -97,6 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+createHeaderElements();
 createLoginContainer();
 getLanguage();
-createHeaderElements();
