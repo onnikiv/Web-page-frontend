@@ -95,10 +95,10 @@ header .header-buttons button:hover {
 }
 
 .center-container {
-  position: relative;
   display: grid;
-  grid-template-columns: 25% 1fr; /* RAVINTOLALISTA - MAPPI*/
+  grid-template-columns: 30% 1fr; /* RAVINTOLALISTA - MAPPI*/
   height: 650px;
+  overflow-x: visible;
   border: 5px solid #333333;
   background-color: #333333;
   gap: 5px;
@@ -188,7 +188,6 @@ header .header-buttons button:hover {
 
 .menu-container {
   display: grid;
-  padding-top: 2%;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -230,10 +229,9 @@ header .header-buttons button:hover {
 
 .selected-day-menu {
   text-align: center;
-  border-top: 1px solid #b3b3b3;
-  border-bottom: 1px solid #b3b3b3;
   padding: 50px 50px;
 }
+
 .selected-day-menu th {
   display: grid;
   grid-template-columns: 1fr;
