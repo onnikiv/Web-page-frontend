@@ -1,5 +1,5 @@
 import {fetchData} from '../utils/fetchData.js';
-import {errorBox} from '../pages/index.js';
+import {infoModal} from '../utils/infoModal.js';
 import {url} from '../utils/variables.js';
 import {sortByName} from '../utils/sortByName.js';
 
@@ -10,9 +10,8 @@ const getRestaurants = async () => {
     restaurants = await fetchData(url + '/restaurants');
   } catch (error) {
     console.log(error);
-    errorBox.textContent =
-      'Failed to fetch restaurants. \n Be sure to be Connected to the schools network ';
-    errorBox.showModal();
+    const info = 'Failed to fetch restaurants. \n Be sure to be Connected to the schools network ';
+    infoModal(info);
   }
 };
 
@@ -21,9 +20,8 @@ const getRestaurantDailyMenu = async (id, lang) => {
     return await fetchData(`${url}/restaurants/daily/${id}/${lang}`);
   } catch (error) {
     console.log(error);
-    errorBox.textContent =
-      'Failed to fetch menu. \n Be sure to be Connected to the schools network ';
-    errorBox.showModal();
+    const info = 'Failed to fetch menu. \n Be sure to be Connected to the schools network ';
+    infoModal(info);
   }
 };
 
@@ -32,8 +30,8 @@ const getRestaurantWeeklyMenu = async (id, lang) => {
     return await fetchData(`${url}/restaurants/weekly/${id}/${lang}`);
   } catch (error) {
     console.log(error);
-    errorBox.textContent =
-      'Failed to fetch weeks menu. \n Be sure to be Connected to the schools network ';
+    const info = 'Failed to fetch weeks menu. \n Be sure to be Connected to the schools network ';
+    infoModal(info);
   }
 };
 
