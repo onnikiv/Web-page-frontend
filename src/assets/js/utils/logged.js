@@ -6,7 +6,6 @@ const profileIcon = async () => {
   if (isLoggedIn()) {
     const profileElement = document.getElementById('user-profile');
     const iconUrl = await getProfileIcon();
-    console.log(iconUrl, ' icon urls');
     profileElement.innerHTML = `<a href="./profile.html">
             <img src="${iconUrl}" alt="Profile" id="profile-icon" />
           </a>`;
@@ -26,7 +25,7 @@ const hideLogin = () => {
 const getProfileIcon = async () => {
   const defaultIcon = './assets/images/spoon.jpg';
   const userId = localStorage.getItem('id');
-  console.log(userId);
+
   if (!userId) {
     return defaultIcon;
   }
@@ -38,10 +37,8 @@ const getProfileIcon = async () => {
       return defaultIcon;
     }
 
-    const data = await response.json(); // Parse the JSON response
-    console.log(data); // Log the response object for debugging
+    const data = await response.json();
 
-    // Assuming the filename is stored in a property called 'filename'
     return data.filename ? `http://127.0.0.1:3000/public/${data.filename}.jpg` : defaultIcon;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
