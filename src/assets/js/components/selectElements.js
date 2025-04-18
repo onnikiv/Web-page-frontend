@@ -36,8 +36,8 @@ const populateSelectElements = () => {
   // tää on vähä turha nojoo
   const allCitiesOption = document.getElementById('all-cities');
   const allCompaniesOption = document.getElementById('all-companies');
-  allCompaniesOption.innerText = getLanguage() === 'fi' ? `Kaikki` : `All`;
-  allCitiesOption.innerText = getLanguage() === 'fi' ? `Kaikki` : `All`;
+  allCompaniesOption.innerText = getLanguage() === 'fi' ? `Yritys` : `Company`;
+  allCitiesOption.innerText = getLanguage() === 'fi' ? `Kaupunki` : `City`;
 };
 
 export {
