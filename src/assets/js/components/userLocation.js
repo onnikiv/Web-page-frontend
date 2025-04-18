@@ -7,7 +7,6 @@ import {infoModal} from '../utils/infoModal.js';
 const success = (position) => {
   const coordsObject = position.coords;
   const userLocation = [coordsObject.longitude, coordsObject.latitude];
-  console.log(userLocation, ' userLocation');
 
   let closestRestaurant = null;
   let shortestDistance = Infinity;
@@ -21,12 +20,10 @@ const success = (position) => {
   });
 
   if (closestRestaurant) {
-    console.log(
-      `Closest restaurant is ${closestRestaurant.name} at a distance of ${shortestDistance}`
-    );
     openRestaurantByClick(closestRestaurant);
   } else {
-    console.log('No restaurants found.');
+    const info = getLanguage() === 'fi' ? 'Ravintoloita ei löytynyt.' : 'No restaurants found.';
+    infoModal(info);
   }
 };
 
