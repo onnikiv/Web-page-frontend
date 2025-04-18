@@ -1,0 +1,76 @@
+/* Set a consistent font style for all elements */
+button,
+select {
+  font-family: monospace;
+  font-size: x-large;
+  font-weight: bold;
+  background-color: #74b1e6;
+}
+
+#company-select {
+  border: 2px solid #0078d7;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+#company-select:hover {
+  background-color: #e6f7ff;
+  border-color: #005a9e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#company-select:focus {
+  outline: none;
+  border-color: #003a75;
+  box-shadow: 0 0 5px rgba(0, 58, 117, 0.5);
+}
+
+/* Style for city-select */
+#city-select {
+  background-color: #fffaf0;
+  border: 2px solid #ffa500;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+#city-select:hover {
+  background-color: #fff2cc;
+  border-color: #cc8400;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#city-select:focus {
+  outline: none;
+  border-color: #996300;
+  box-shadow: 0 0 5px rgba(153, 99, 0, 0.5);
+}
+
+/* Style for nearest-restaurant */
+#nearest-restaurant {
+  cursor: pointer;
+  background-color: #32cd32;
+  border: 2px solid #32cd32;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+#nearest-restaurant:hover {
+  background-color: #e0ffe0;
+  border-color: #228b22;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#nearest-restaurant:focus {
+  outline: none;
+  border-color: #006400;
+  box-shadow: 0 0 5px rgba(0, 100, 0, 0.5);
+}

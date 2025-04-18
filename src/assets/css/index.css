@@ -1,4 +1,5 @@
 @import url('./user.css');
+@import url('./filters.css');
 
 html {
   font-family: monospace;
