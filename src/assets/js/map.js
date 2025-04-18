@@ -2,7 +2,7 @@ import {fetchRestaurantWeekMenu} from './pages/index.js';
 /* eslint-disable no-undef */
 const markers = new Map();
 
-const map = L.map('map').setView([60.2144768, 25.0281984], 13);
+const map = L.map('map').setView([60.2, 24.98], 11);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -56,4 +56,4 @@ const openRestaurantByClick = (restaurant) => {
   }
 };
 
-export {addRestaurantsToMap, changeMapView};
+export {addRestaurantsToMap, changeMapView, openRestaurantByClick};
