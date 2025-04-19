@@ -1,7 +1,6 @@
 import getLanguage from '../utils/language.js';
-import {createNearestButton} from '../components/userLocation.js';
 import {addRestaurantsToMap, changeMapView} from '../map.js';
-import {companySelect, citySelect, populateSelectElements} from '../components/selectElements.js';
+import {createSelectElements} from '../components/selectElements.js';
 import {
   createHeaderElements,
   createRestaurantRowHtml,
@@ -138,10 +137,7 @@ const main = async () => {
   try {
     createHeaderElements();
     profileIcon();
-    companySelect();
-    citySelect();
-    populateSelectElements();
-    createNearestButton();
+    createSelectElements();
 
     await getRestaurants();
     addRestaurantsToMap(restaurants);
