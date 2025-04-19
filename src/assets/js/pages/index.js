@@ -110,7 +110,7 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
 
   const restaurantInfo = document.getElementById('restaurant-info');
   restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
-  favouriteButtonEvent();
+  favouriteButtonEvent(restaurant);
   restaurantInfo.style.display = 'block';
 
   try {
