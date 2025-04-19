@@ -71,6 +71,11 @@ header .header-buttons button:hover {
   transition: color 0.3s, color 0.3s;
 }
 
+#language-button {
+  font-family: monospace;
+  font-size: x-large;
+}
+
 #login {
   border: #333333 2px solid;
   display: flex;
@@ -92,6 +97,13 @@ header .header-buttons button:hover {
   color: #333333;
   background-color: #1976d2;
   transition: color 0.3s, color 0.3s;
+}
+
+#header-username {
+  font-size: 1.3em;
+  color: #ffffff;
+  height: 1px;
+  padding-left: 20px;
 }
 
 .center-container {

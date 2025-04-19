@@ -75,3 +75,20 @@
 #logout:hover {
   background-color: #b71c1c;
 }
+
+#upload-thumbnail {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 20px;
+}
+
+#thumbnail {
+  border: 2px solid #b3b3b3;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#profile-form input:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
