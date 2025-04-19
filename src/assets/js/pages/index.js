@@ -16,6 +16,7 @@ import {
   getRestaurantWeeklyMenu,
 } from '../components/restaurants.js';
 import {profileIcon} from '../utils/logged.js';
+import {favouriteButtonEvent} from '../components/setFavourite.js';
 
 const table = document.getElementById('restaurant-box');
 const menuHeadings = document.querySelector('.menu-headings');
@@ -109,6 +110,7 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
 
   const restaurantInfo = document.getElementById('restaurant-info');
   restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
+  favouriteButtonEvent();
   restaurantInfo.style.display = 'block';
 
   try {
@@ -133,14 +135,14 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
 };
 
 const main = async () => {
-  profileIcon();
-  createHeaderElements();
-  companySelect();
-  citySelect();
-  populateSelectElements();
-  createNearestButton();
-
   try {
+    createHeaderElements();
+    profileIcon();
+    companySelect();
+    citySelect();
+    populateSelectElements();
+    createNearestButton();
+
     await getRestaurants();
     addRestaurantsToMap(restaurants);
     sortRestaurants();
