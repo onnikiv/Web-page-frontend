@@ -1,5 +1,6 @@
 import getLanguage from '../utils/language.js';
 import {isLoggedIn} from '../utils/logged.js';
+import {postFavouriteRestaurant} from './postFavourite.js';
 const createFavouriteSection = () => {
   return `<div class="favourite-section">
             <p><strong>${
@@ -13,7 +14,7 @@ const favouriteButtonEvent = (restaurant) => {
   const favouriteBtnElement = document.getElementById('favourite-btn');
   favouriteBtnElement.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log(restaurant._id);
+    postFavouriteRestaurant(restaurant._id);
   });
 
   isLoggedIn()
