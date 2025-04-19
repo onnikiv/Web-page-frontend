@@ -62,7 +62,12 @@ const createProfileContainer = () => {
 
   uploadButton.addEventListener('click', async (event) => {
     event.preventDefault();
+
+    // deleting oldthumbnail if there is one
+    deleteOldThumbnail();
+
     const file = thumbnailInput.files[0];
+
     if (!file) {
       alert('Please select a file to upload.');
       return;
@@ -73,7 +78,7 @@ const createProfileContainer = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:3000/api/v1/thumbnails', {
+      const response = await fetch(`http://localhost:3000/api/v1/thumbnails/`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -83,6 +88,7 @@ const createProfileContainer = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.log(errorData, 'errordata');
         throw new Error(errorData.error || 'Failed to upload thumbnail');
       }
 
@@ -97,12 +103,60 @@ const createProfileContainer = () => {
   });
 };
 
+const deleteOldThumbnail = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/v1/thumbnails/${localStorage.getItem('id')}`
+    );
+
+    if (response.status === 404) {
+      return;
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch old thumbnail');
+    }
+
+    const data = await response.json();
+    const deleteResponse = await fetch(`http://localhost:3000/api/v1/thumbnails/${data.img_id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+
+    if (!deleteResponse.ok) {
+      const errorData = await deleteResponse.json();
+      throw new Error(errorData.error || 'Failed to delete old thumbnail');
+    }
+  } catch (error) {
+    console.error('Error deleting old thumbnail:', error.message);
+    throw error;
+  }
+};
+
+const logOut = () => {
+  const logOutButton = document.getElementById('logout');
+
+  logOutButton.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('username');
+
+    window.location = './index.html';
+  });
+};
+
 const main = () => {
   if (!isLoggedIn()) {
     window.location = './index.html';
   } else {
     createHeaderElements();
     createProfileContainer();
+    logOut();
   }
 };
 
