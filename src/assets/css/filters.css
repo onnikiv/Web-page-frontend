@@ -4,7 +4,7 @@
   background-color: rgba(199, 199, 199, 0.5);
   border-bottom: 2px solid #333333;
 }
-
+#favourites-select,
 #nearest-restaurant,
 #city-select,
 #company-select {
@@ -28,6 +28,10 @@
 }
 #nearest-restaurant {
   background-color: #3cb371;
+}
+
+#favourites-select {
+  background-color: #a7b33c;
 }
 
 #nearest-restaurant:hover,
