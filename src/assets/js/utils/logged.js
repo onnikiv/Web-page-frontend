@@ -1,3 +1,5 @@
+import getLanguage from './language.js';
+
 const isLoggedIn = () => {
   return localStorage.getItem('token') !== null;
 };
@@ -45,4 +47,14 @@ const getProfileIcon = async () => {
   }
 };
 
-export {isLoggedIn, profileIcon};
+const setFavouriteButton = () => {
+  return isLoggedIn()
+    ? `<div class="favourite-section">
+            <p><strong>${
+              getLanguage() === 'fi' ? 'Aseta suosikiksi' : 'Set as Favourite'
+            }</strong></p><button id="favourite-btn">❤️</button>
+          </div>`
+    : ``;
+};
+
+export {isLoggedIn, profileIcon, setFavouriteButton};
