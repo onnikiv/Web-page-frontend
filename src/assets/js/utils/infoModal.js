@@ -4,8 +4,10 @@ const infoModal = (info) => {
   closeButton.textContent = 'X';
   closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
+    modal.innerHTML = '';
+    modal.close();
   });
-
+  modal.style.display = 'flex';
   modal.append(closeButton, info);
   modal.showModal();
 };
