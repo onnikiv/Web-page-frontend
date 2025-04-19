@@ -1,6 +1,6 @@
 import {createHeaderElements} from '../components/htmlComponents.js';
 import getLanguage from '../utils/language.js';
-import {isLoggedIn} from '../utils/logged.js';
+import {isLoggedIn, profileIcon} from '../utils/logged.js';
 
 const createProfileContainer = () => {
   const profileContainer = document.querySelector('.profile-container');
@@ -92,10 +92,11 @@ const createProfileContainer = () => {
         throw new Error(errorData.error || 'Failed to upload thumbnail');
       }
 
+      // eslint-disable-next-line no-unused-vars
       const result = await response.json();
 
       alert('Thumbnail uploaded successfully!');
-      console.log('Thumbnail uploaded successfully:', result);
+      window.location = './profile.html';
     } catch (error) {
       console.error('Error uploading thumbnail:', error.message);
       alert('Error uploading thumbnail: ' + error.message);
@@ -154,6 +155,7 @@ const main = () => {
   if (!isLoggedIn()) {
     window.location = './index.html';
   } else {
+    profileIcon();
     createHeaderElements();
     createProfileContainer();
     logOut();
