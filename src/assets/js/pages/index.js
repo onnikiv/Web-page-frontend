@@ -14,7 +14,7 @@ import {
   sortRestaurants,
   getRestaurantWeeklyMenu,
 } from '../components/restaurants.js';
-import {profileIcon} from '../utils/logged.js';
+import {isLoggedIn, profileIcon} from '../utils/logged.js';
 import {favouriteButtonEvent} from '../components/favouriteElement.js';
 
 const table = document.getElementById('restaurant-box');
@@ -109,7 +109,11 @@ export const fetchRestaurantWeekMenu = async (restaurant) => {
 
   const restaurantInfo = document.getElementById('restaurant-info');
   restaurantInfo.innerHTML = getRestaurantInfo(restaurant, getLanguage());
-  favouriteButtonEvent(restaurant);
+
+  if (isLoggedIn()) {
+    favouriteButtonEvent(restaurant);
+  }
+
   restaurantInfo.style.display = 'block';
 
   try {

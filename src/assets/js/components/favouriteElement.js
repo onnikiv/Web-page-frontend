@@ -6,13 +6,13 @@ import {
   postFavouriteRestaurant,
 } from './postFavourite.js';
 const createFavouriteSection = () => {
-  return `<div class="favourite-section">
+  return `<div class="favourite-section" style="display: none;">
             <div id="add">
               <p><strong>${
                 getLanguage() === 'fi' ? 'Aseta suosikiksi' : 'Set as Favourite'
               }</strong></p><button id="favourite-btn">❤️</button>
             </div>
-            <div id="remove" style="display: none;">
+            <div id="remove">
             <p><strong>${
               getLanguage() === 'fi' ? 'Poista Suosikki' : 'Remove Favourite'
             }</strong></p><button id="remove-favourite-btn">❌</button>
@@ -23,7 +23,7 @@ const createFavouriteSection = () => {
 const favouriteButtonEvent = async (restaurant) => {
   const addBtn = document.getElementById('favourite-btn');
   const removeBtn = document.getElementById('remove-favourite-btn');
-
+  document.querySelector('.favourite-section').style.display = 'block';
   // lisääminen
   const addDiv = document.getElementById('add');
   addBtn.addEventListener('click', (event) => {
