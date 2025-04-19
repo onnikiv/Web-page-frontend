@@ -8,7 +8,7 @@ const profileIcon = async () => {
     const iconUrl = await getProfileIcon();
     profileElement.innerHTML = `<a href="./profile.html">
             <img src="${iconUrl}" alt="Profile" id="profile-icon" />
-          </a>`;
+          </a><p id="header-username">${localStorage.getItem('username') || ''}</p>`;
   }
   hideLogin();
 };
