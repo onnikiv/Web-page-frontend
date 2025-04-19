@@ -156,6 +156,10 @@ header .header-buttons button:hover {
   height: auto;
 }
 
+.restaurant-info p {
+  margin: 10px;
+}
+
 #restaurant-box {
   border-collapse: collapse;
   width: 100%;

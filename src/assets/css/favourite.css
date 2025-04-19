@@ -1,16 +1,16 @@
 .favourite-section {
   display: grid;
   font-style: italic;
-  grid-template-columns: 1fr 1fr;
-  padding: 20px;
-  background-color: #f9f9f9;
+  grid-template-columns: 1fr 0.4fr;
+  text-align: center;
+  align-items: center;
+  background-color: #dadada;
   border: 4px dotted #ff3a3a;
   border-radius: 8px;
   box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.86);
 }
 
 #favourite-btn {
-  margin: 10%;
   width: 50px;
   text-align: center;
   border-radius: 4px;
