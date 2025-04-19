@@ -16,7 +16,7 @@ import {
   getRestaurantWeeklyMenu,
 } from '../components/restaurants.js';
 import {profileIcon} from '../utils/logged.js';
-import {favouriteButtonEvent} from '../components/setFavourite.js';
+import {favouriteButtonEvent} from '../components/favouriteElement.js';
 
 const table = document.getElementById('restaurant-box');
 const menuHeadings = document.querySelector('.menu-headings');
