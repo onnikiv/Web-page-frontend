@@ -1,7 +1,6 @@
 .favourite-section {
   display: grid;
   font-style: italic;
-  grid-template-columns: 1fr 0.4fr;
   text-align: center;
   align-items: center;
   background-color: #dadada;
