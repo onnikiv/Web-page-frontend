@@ -1,4 +1,5 @@
 import getLanguage from '../utils/language.js';
+import {setFavouriteButton} from '../utils/logged.js';
 
 const createHeaderElements = () => {
   const headerTitle = document.getElementById('page-title');
@@ -35,6 +36,7 @@ const getRestaurantInfo = (restaurant) => {
           <p><strong>Kaupunki:</strong> ${city}</p>
           <p><strong>Puh:</strong> ${phone}</p>
           <p><strong>Yritys:</strong> ${company}</p>
+          ${setFavouriteButton()}
        </article>`
     : `<article class="restaurant-info">
           <h3>${name}</h3>
@@ -43,6 +45,7 @@ const getRestaurantInfo = (restaurant) => {
           <p><strong>City:</strong> ${city}</p>
           <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Company:</strong> ${company}</p>
+          ${setFavouriteButton()}
        </article>`;
 };
 
