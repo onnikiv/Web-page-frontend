@@ -13,7 +13,7 @@ const favouriteButtonEvent = (restaurant) => {
   const favouriteBtnElement = document.getElementById('favourite-btn');
   favouriteBtnElement.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log(restaurant);
+    console.log(restaurant._id);
   });
 
   isLoggedIn()
