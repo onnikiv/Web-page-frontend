@@ -1,5 +1,5 @@
 import getLanguage from '../utils/language.js';
-import {createFavouriteSection} from './setFavourite.js';
+import {createFavouriteSection} from './favouriteElement.js';
 
 const createHeaderElements = () => {
   const headerTitle = document.getElementById('page-title');
