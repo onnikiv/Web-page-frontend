@@ -32,9 +32,7 @@ const getProfileIcon = async () => {
 
   try {
     const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnails/${userId}`);
-
     if (!response.ok) {
-      console.error('Failed to fetch thumbnail:', response.statusText);
       return defaultIcon;
     }
 
