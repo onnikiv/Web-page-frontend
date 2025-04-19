@@ -10,7 +10,8 @@
   box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.86);
 }
 
-#favourite-btn {
+#favourite-btn,
+#remove-favourite-btn {
   width: 50px;
   text-align: center;
   border-radius: 4px;
@@ -19,6 +20,7 @@
   transition: background-color 0.3s ease;
 }
 
-#favourite-btn:hover {
+#favourite-btn:hover,
+#remove-favourite-btn:hover {
   background-color: #920c0c;
 }
