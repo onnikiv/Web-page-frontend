@@ -8,12 +8,12 @@ const createFavouriteSection = () => {
           </div>`;
 };
 
-const favouriteButtonEvent = () => {
+const favouriteButtonEvent = (restaurant) => {
   const favouriteSection = document.querySelector('.favourite-section');
   const favouriteBtnElement = document.getElementById('favourite-btn');
   favouriteBtnElement.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log('testi');
+    console.log(restaurant);
   });
 
   isLoggedIn()
