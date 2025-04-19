@@ -8,7 +8,7 @@ const infoModal = (info) => {
     modal.close();
   });
   modal.style.display = 'flex';
-  modal.append(closeButton, info);
+  modal.append(info, closeButton);
   modal.showModal();
 };
 
