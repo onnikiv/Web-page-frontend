@@ -35,6 +35,7 @@ const createLoginContainer = () => {
         id="username"
         name="username"
         placeholder="${initialInputs[2]}"
+        autocomplete="username"
         required
       />
       <label for="password"><b>${initialInputs[3]}</b></label>
@@ -43,6 +44,7 @@ const createLoginContainer = () => {
         id="password"
         name="password"
         placeholder="${initialInputs[4]}"
+        autocomplete="current-password"
         required
       />
 
