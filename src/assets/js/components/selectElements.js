@@ -4,6 +4,7 @@ import {restaurants} from './restaurants.js';
 import getLanguage from '../utils/language.js';
 import {createNearestButton} from './userLocation.js';
 import {getAllFavouriteRestaurants} from './postFavourite.js';
+import {isLoggedIn} from '../utils/logged.js';
 
 const filterRestaurantsByCompany = (type) => {
   return type === 'All'
@@ -63,6 +64,9 @@ const favouritesSelect = () => {
       console.log('No restaurants found.');
     }
   });
+  if (!isLoggedIn()) {
+    favouritesSelect.style.display = 'none';
+  }
 };
 
 const populateSelectElements = () => {
