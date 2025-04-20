@@ -12,7 +12,7 @@ const createProfileContainer = () => {
     4: 'Update Profile',
     5: 'Change Password',
     6: 'Logout',
-    7: 'Upload Profile Picture',
+    7: 'Change Profile Picture',
   };
 
   let finnishInputs = {
@@ -22,32 +22,13 @@ const createProfileContainer = () => {
     4: 'Päivitä profiili',
     5: 'Vaihda salasana',
     6: 'Kirjaudu ulos',
-    7: 'Lataa profiilikuva',
+    7: 'Vaihda profiilikuva',
   };
 
   getLanguage() === 'fi' ? (initialInputs = finnishInputs) : initialInputs;
 
   profileContainer.innerHTML = `
-    <h1>${initialInputs[1]}</h1>
-    <form id="profile-form">
-      <label for="username"><b>${initialInputs[2]}</b></label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="${initialInputs[2]}"
-        required
-      />
-      <label for="email"><b>${initialInputs[3]}</b></label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="${initialInputs[3]}"
-        required
-      />
-      <button type="submit">${initialInputs[4]}</button>
-    </form>
+    <h1>${localStorage.getItem('username')}</h1>
     <div id="upload-thumbnail">
       <label for="thumbnail"><b>${initialInputs[7]}</b></label>
       <input type="file" id="thumbnail" name="thumbnail" accept="image/*" />
@@ -63,13 +44,17 @@ const createProfileContainer = () => {
   uploadButton.addEventListener('click', async (event) => {
     event.preventDefault();
 
-    // deleting oldthumbnail if there is one
+    // poistetaan vanha jos sellanen on
     deleteOldThumbnail();
 
     const file = thumbnailInput.files[0];
 
     if (!file) {
-      alert('Please select a file to upload.');
+      alert(
+        getLanguage() === 'fi'
+          ? 'Valitse tiedosto ladattavaksi.'
+          : 'Please select a file to upload.'
+      );
       return;
     }
 
@@ -88,18 +73,24 @@ const createProfileContainer = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(errorData, 'errordata');
         throw new Error(errorData.error || 'Failed to upload thumbnail');
       }
 
       // eslint-disable-next-line no-unused-vars
       const result = await response.json();
 
-      alert('Thumbnail uploaded successfully!');
+      alert(
+        getLanguage() === 'fi'
+          ? 'Profiilikuva ladattu onnistuneesti!'
+          : 'Thumbnail uploaded successfully!'
+      );
       window.location = './profile.html';
     } catch (error) {
-      console.error('Error uploading thumbnail:', error.message);
-      alert('Error uploading thumbnail: ' + error.message);
+      alert(
+        getLanguage() === 'fi'
+          ? 'Virhe ladattaessa profiilikuvaa: ' + error.message
+          : 'Error uploading thumbnail: ' + error.message
+      );
     }
   });
 };
@@ -132,7 +123,7 @@ const deleteOldThumbnail = async () => {
       throw new Error(errorData.error || 'Failed to delete old thumbnail');
     }
   } catch (error) {
-    console.error('Error deleting old thumbnail:', error.message);
+    console.log('Error deleting old thumbnail:', error.message);
     throw error;
   }
 };

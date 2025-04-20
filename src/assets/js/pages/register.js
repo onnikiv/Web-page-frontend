@@ -87,12 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value.trim();
 
       if (!name || !username || !password || !passwordRepeat || !email) {
-        alert('All fields are required.');
+        alert(
+          getLanguage() === 'fi' ? 'Kaikki kentät ovat pakollisia.' : 'All fields are required.'
+        );
         return;
       }
 
       if (password !== passwordRepeat) {
-        alert("Passwords don't match!");
+        alert(getLanguage() === 'fi' ? 'Salasanat eivät täsmää!' : "Passwords don't match!");
         return;
       }
 
@@ -113,7 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           // eslint-disable-next-line no-unused-vars
           const data = await response.json();
-          alert('Registration successful! User added!');
+          alert(
+            getLanguage() === 'fi'
+              ? 'Rekisteröinti onnistui! Käyttäjä lisätty!'
+              : 'Registration successful! User added!'
+          );
           window.location.href = './login.html';
         } else {
           const errorData = await response.json();
