@@ -87,11 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
           window.location.href = './index.html';
         } else {
-          alert('Login failed. Please check your credentials.');
+          alert(
+            getLanguage() === 'fi'
+              ? 'Kirjautuminen epäonnistui. Tarkista tunnuksesi.'
+              : 'Login failed. Please check your credentials.'
+          );
         }
       } catch (error) {
         console.error('Error during login:', error);
-        alert('An error occurred. Please try again later.');
+        alert(
+          getLanguage() === 'fi'
+            ? 'Tapahtui virhe. Yritä myöhemmin uudelleen.'
+            : 'An error occurred. Please try again later.'
+        );
       }
     });
   } else {
