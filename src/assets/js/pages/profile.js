@@ -92,7 +92,7 @@ const createProfileContainer = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/v1/thumbnails/`, {
+      const response = await fetch(`https://10.120.32.69/web-page/api/v1/thumbnails/`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -127,7 +127,7 @@ const createProfileContainer = () => {
 const deleteOldThumbnail = async () => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/v1/thumbnails/${localStorage.getItem('id')}`
+      `https://10.120.32.69/web-page/api/v1/thumbnails/${localStorage.getItem('id')}`
     );
 
     if (response.status === 404) {
@@ -140,12 +140,15 @@ const deleteOldThumbnail = async () => {
     }
 
     const data = await response.json();
-    const deleteResponse = await fetch(`http://localhost:3000/api/v1/thumbnails/${data.img_id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+    const deleteResponse = await fetch(
+      `https://10.120.32.69/web-page/api/v1/thumbnails/${data.img_id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
 
     if (!deleteResponse.ok) {
       const errorData = await deleteResponse.json();
@@ -200,7 +203,7 @@ const putNewPassword = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/v1/users/${localStorage.getItem('id')}`,
+          `https://10.120.32.69/web-page/api/v1/users/${localStorage.getItem('id')}`,
           {
             method: 'PUT',
             headers: {
