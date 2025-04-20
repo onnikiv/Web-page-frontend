@@ -3,7 +3,7 @@ import getLanguage from '../utils/language.js';
 const getAllFavouriteRestaurants = async () => {
   try {
     const userId = localStorage.getItem('id');
-    const checkResponse = await fetch(`http://localhost:3000/api/v1/favourites/${userId}`, {
+    const checkResponse = await fetch(`https://10.120.32.69/web-page/api/v1/favourites/${userId}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -36,7 +36,7 @@ const getAllFavouriteRestaurants = async () => {
 const checkIfFavourite = async (restaurantId) => {
   try {
     const userId = localStorage.getItem('id');
-    const checkResponse = await fetch(`http://localhost:3000/api/v1/favourites/${userId}`, {
+    const checkResponse = await fetch(`https://10.120.32.69/web-page/api/v1/favourites/${userId}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -69,7 +69,7 @@ const postFavouriteRestaurant = async (restaurantId) => {
       throw new Error('Missing user_id or restaurantid');
     }
 
-    const response = await fetch(`http://localhost:3000/api/v1/favourites`, {
+    const response = await fetch(`https://10.120.32.69/web-page/api/v1/favourites`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -108,7 +108,7 @@ const deleteFavouriteRestaurant = async (restaurantId) => {
       throw new Error('Missing user_id or restaurantid');
     }
 
-    const response = await fetch(`http://localhost:3000/api/v1/favourites/${userId}`, {
+    const response = await fetch(`https://10.120.32.69/web-page/api/v1/favourites/${userId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
