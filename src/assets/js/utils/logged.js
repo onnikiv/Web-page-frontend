@@ -31,7 +31,7 @@ const getProfileIcon = async () => {
   }
 
   try {
-    const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnails/${userId}`);
+    const response = await fetch(`https://10.120.32.69/web-page/api/v1/thumbnails/${userId}`);
     if (!response.ok) {
       console.log('User Avatar not found -> using default');
       return defaultIcon;
@@ -39,7 +39,9 @@ const getProfileIcon = async () => {
 
     const data = await response.json();
 
-    return data.filename ? `http://127.0.0.1:3000/uploads/${data.filename}` : defaultIcon;
+    return data.filename
+      ? `https://10.120.32.69/web-page/api/v1/uploads/${data.filename}`
+      : defaultIcon;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
     return defaultIcon;
