@@ -75,3 +75,16 @@
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
+
+#change-password-container {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
