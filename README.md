@@ -21,6 +21,16 @@ For more information about the backend, visit the [backend repository](https://g
 
 ---
 
+### Screenshots
+
+#### Main Page
+
+![Main Page](images/mainpage.png)
+
+#### Additional Images
+
+If you want to see more images, navigate to the `images` folder in the project directory. It contains various screenshots showcasing different features and pages of the application.
+
 ### Issues
 
 1. Fetching `Stadin AO` student restaurant weekly menus in English results in an empty `name` attribute in the object. In Finnish, the object is as expected.
