@@ -39,9 +39,7 @@ const getProfileIcon = async () => {
 
     const data = await response.json();
 
-    return data.filename
-      ? `https://10.120.32.69/web-page/api/v1/uploads/${data.filename}`
-      : defaultIcon;
+    return data.filename ? `https://10.120.32.69/web-page/uploads/${data.filename}` : defaultIcon;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
     return defaultIcon;
