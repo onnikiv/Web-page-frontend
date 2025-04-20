@@ -13,6 +13,10 @@ const createProfileContainer = () => {
     5: 'Change Password',
     6: 'Logout',
     7: 'Change Profile Picture',
+    8: 'Current Password',
+    9: 'New Password',
+    10: 'Confirm Password',
+    11: 'Submit',
   };
 
   let finnishInputs = {
@@ -23,20 +27,45 @@ const createProfileContainer = () => {
     5: 'Vaihda salasana',
     6: 'Kirjaudu ulos',
     7: 'Vaihda profiilikuva',
+    8: 'Nykyinen salasana',
+    9: 'Uusi salasana',
+    10: 'Vahvista salasana',
+    11: 'Lähetä',
   };
 
   getLanguage() === 'fi' ? (initialInputs = finnishInputs) : initialInputs;
 
   profileContainer.innerHTML = `
+  <div>
     <h1>${localStorage.getItem('username')}</h1>
     <div id="upload-thumbnail">
       <label for="thumbnail"><b>${initialInputs[7]}</b></label>
       <input type="file" id="thumbnail" name="thumbnail" accept="image/*" />
       <button id="upload-thumbnail-btn">${initialInputs[7]}</button>
     </div>
+    <form id="change-password-container" style="display: none;">
+      <input type="text" id="username" name="username" value="${localStorage.getItem(
+        'username'
+      )}" autocomplete="username" hidden />
+      <label for="current-password"><b>${initialInputs[8]}</b></label>
+      <input type="password" id="current-password" placeholder="${
+        initialInputs[8]
+      }" autocomplete="current-password" />
+      <label for="new-password"><b>${initialInputs[9]}</b></label>
+      <input type="password" id="new-password" placeholder="${
+        initialInputs[9]
+      }" autocomplete="new-password" />
+      <label for="confirm-password"><b>${initialInputs[10]}</b></label>
+      <input type="password" id="confirm-password" placeholder="${
+        initialInputs[10]
+      }" autocomplete="new-password" />
+      <button id="submit-password-change" type="submit">${initialInputs[11]}</button>
+    </form>
+
     <button id="change-password">${initialInputs[5]}</button>
     <button id="logout">${initialInputs[6]}</button>
-  `;
+  </div>
+`;
 
   const uploadButton = document.getElementById('upload-thumbnail-btn');
   const thumbnailInput = document.getElementById('thumbnail');
@@ -128,6 +157,92 @@ const deleteOldThumbnail = async () => {
   }
 };
 
+const changePasswordElement = () => {
+  const uploadThumbnailDiv = document.getElementById('upload-thumbnail');
+  const changePasswordDiv = document.getElementById('change-password-container');
+  const changePasswordBtn = document.getElementById('change-password');
+  changePasswordBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log('nappia painenttu');
+    if (changePasswordDiv.style.display === 'grid') {
+      changePasswordDiv.style.display = 'none';
+      uploadThumbnailDiv.style.display = 'grid';
+    } else {
+      changePasswordDiv.style.display = 'grid';
+      uploadThumbnailDiv.style.display = 'none';
+    }
+  });
+};
+
+const putNewPassword = () => {
+  const changePasswordForm = document.getElementById('change-password-container');
+  if (changePasswordForm) {
+    changePasswordForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const currentPassword = document.getElementById('current-password').value.trim();
+      const newPassword = document.getElementById('new-password').value.trim();
+      const confirmPassword = document.getElementById('confirm-password').value.trim();
+
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        alert(
+          getLanguage() === 'fi' ? 'Kaikki kentät ovat pakollisia.' : 'All fields are required.'
+        );
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        alert(
+          getLanguage() === 'fi' ? 'Uudet salasanat eivät täsmää!' : "New passwords don't match!"
+        );
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/v1/users/${localStorage.getItem('id')}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify({
+              currentPassword,
+              newPassword,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          alert(
+            getLanguage() === 'fi'
+              ? 'Salasana vaihdettu onnistuneesti!'
+              : 'Password changed successfully!'
+          );
+          window.location.reload();
+        } else {
+          const errorData = await response.json();
+          alert(
+            getLanguage() === 'fi'
+              ? `Salasanan vaihto epäonnistui: ${errorData.message || 'Tuntematon virhe'}`
+              : `Password change failed: ${errorData.message || 'Unknown error'}`
+          );
+        }
+      } catch (error) {
+        console.error('Error changing password:', error);
+        alert(
+          getLanguage() === 'fi'
+            ? 'Tapahtui virhe. Yritä myöhemmin uudelleen.'
+            : 'An error occurred. Please try again later.'
+        );
+      }
+    });
+  } else {
+    console.error('Change password form element not found.');
+  }
+};
+
 const logOut = () => {
   const logOutButton = document.getElementById('logout');
 
@@ -149,7 +264,9 @@ const main = () => {
     profileIcon();
     createHeaderElements();
     createProfileContainer();
+    changePasswordElement();
     logOut();
+    putNewPassword();
   }
 };
 
