@@ -1,55 +1,73 @@
-# TODO vielä...
+# Web Page Frontend
 
-1. Lisätä nappula joka näyttää lähimmän ravintolan
-2. Profiili-sivu
-3. Profiili-sivun ominaisuudet
-   - Omien tietojen muokkaus
-   - Kuvan lisääminen/vaihtaminen
-4. Suosikkiravintolan asettaminen
-5. Profiilikuvan tallentaminen ja hakeminen tietokannasta käyttäjälle
+This project is part of the `wsk-web-development` course. The goal is to create a functional web application that fetches and displays weekly and daily menus from various student restaurants. The application aims to handle data inconsistencies and errors gracefully while providing a user-friendly interface.
 
-Muuten aikalailla donski :)
+## ⭐ Deployment and Server Information
 
-# Ongelmat
+The frontend for this project is deployed and accessible at [https://users.metropolia.fi/~onnikiv/Web-Sovelluskehitys/Web-page/](https://users.metropolia.fi/~onnikiv/Web-Sovelluskehitys/Web-page/). To use the frontend's functionality, ensure that the backend server is running and accessible.
 
-1. Kun fetchataan minkä tahansa `Stadin AO` opiskelijaravintoloiden viikkoruoat englanniksi niin Objektin attribuutti `name` on tyhjä. Suomeksi hakemalla Objekti on kuitenkin niinkuin halutaan.
-   - **Nykyään 15.4. eteenpäin ->** fetchi toimii englanniksi myös mutta ruoat ovat suomenkielellä, sekä jokaisen viikkopäivän päivämäärät ovat keskenään identtiset. ( ͡° ͜ʖ ͡°)
+The backend server for this project is accessible at [http://10.120.32.69/web-page](http://10.120.32.69/web-page). Note that the server does not have SSL authentication, so accessing it may require bypassing browser security warnings (e.g., using `thisisunsafe` in Chrome).
+
+For more information about the backend, visit the [backend repository](https://github.com/onnikiv/Web-page-backend/tree/main).
+
+---
+
+### Features
+
+- Fetch weekly and daily menus from multiple student restaurants.
+- Display menus in both Finnish and English.
+- Handle API errors and data inconsistencies effectively.
+- Provide a clean and responsive user interface.
+
+---
+
+### Issues
+
+1. Fetching `Stadin AO` student restaurant weekly menus in English results in an empty `name` attribute in the object. In Finnish, the object is as expected.
+
+- **As of 15.4. ->** Fetching in English works, but the food names are in Finnish, and all weekday dates are identical. ( ͡° ͜ʖ ͡°)
 
 ```json
-// Tämän kaltainen ongelma tapahtuu useammassa ravintolassa
-// jos fetchi tehdään englanniksi
+// Similar issue occurs in multiple restaurants
+// when fetching in English
 {
   "days": [
     {
       "date": "Saturday 19 April", // <----
       "courses": [
-        { "name": "Lime-korianteriturskaa, perunaa ja kermaviilikastike", "diets": "L" },
-        { "name": "Kasviskiusaus vebablastusta", "diets": "M" },
-        { "name": "Salaattilounas broileri bbq", "diets": "M" }
+        {
+          "name": "Lime-coriander cod, potatoes, and sour cream sauce",
+          "diets": "L"
+        },
+        {"name": "Vegetable casserole with vebab", "diets": "M"},
+        {"name": "Salad lunch with BBQ chicken", "diets": "M"}
       ]
     },
     {
       "date": "Saturday 19 April", // <----
       "courses": [
-        { "name": "Salaattilounas fetajuusto", "diets": "L, G" },
-        { "name": "Espanjalainen broilerikeitto", "diets": "M, G" },
-        { "name": "Juustoinen kukkakaalikeitto", "diets": "L, G" }
+        {"name": "Salad lunch with feta cheese", "diets": "L, G"},
+        {"name": "Spanish chicken soup", "diets": "M, G"},
+        {"name": "Cheesy cauliflower soup", "diets": "L, G"}
       ]
     }
   ]
 }
-......
 ```
 
 ---
 
-Kaikki `HAMK` ravintolat tuottavat error koodin `500`, silloin kun haetaan `/weekly/`.
+All `HAMK` restaurants return a `500` error when fetching `/weekly/`.
 
 ```json
 {
   "message": "Cannot read properties of undefined (reading 'map')",
-  "stack": "Error: Cannot read properties of undefined (reading 'map')\n at getWeeklyMenu (/home/ilkkamtk/apps/sodexo-webscrape/dist/src/api/controllers/restaurantController.js:123:14)\n at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+  "stack": "Error: Cannot read properties of undefined (reading 'map')\n at getWeeklyMenu (/home/ilkkamtk/apps/sodexo-webscrape/dist/src/api/controllers/restaurantController.js:123:14)\n at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
+  "example": {
+    "date": "Saturday 19 April",
+    "courses": []
+  }
 }
 ```
 
-Käyttämällä fetchissä `/daily` kaikki sujuu hyvin, paitsi että joka ikinen `HAMK` menu Objekti on anyway tyhjä...
+Using `/daily` works fine, but every `HAMK` menu object is still empty.
